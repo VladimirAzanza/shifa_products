@@ -7,11 +7,8 @@ from .models import Product
 
 
 class ProductListView(ListView):
-    template_name = 'catalog/product_list.html'
+    model = Product
     paginate_by = 10
-
-    def get_queryset(self):
-        return Product.objects.all()
 
 
 class ProductDetailView(DetailView):

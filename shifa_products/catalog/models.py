@@ -1,8 +1,10 @@
 from django.db import models
 
+from .constants import MAX_LENGTH_NAME
+
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=MAX_LENGTH_NAME)
     slug = models.SlugField(
         unique=True,
         null=False,
@@ -15,7 +17,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=MAX_LENGTH_NAME)
     description = models.TextField()
     image = models.ImageField(upload_to='products/images/')
     category = models.ForeignKey(

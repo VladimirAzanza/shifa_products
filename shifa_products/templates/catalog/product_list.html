@@ -14,7 +14,7 @@
           <h5 class="card-title">{{ product.name }}</h5>
           <p class="card-text">{{ product.category }}</p>
           <p class="card-text text-primary">{{ product.price }} USD</p>
-          <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-primary">Ver Detalles</a>
+          <a href="{% url 'catalog:product_detail' product.id %}" class="btn btn-outline-primary">Ver Detalles</a>
         </div>
       </div>
     </div>

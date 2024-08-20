@@ -21,9 +21,15 @@ class Category(BaseModel):
         )
     )
 
+    def __str__(self):
+        return self.name
+
 
 class Location(BaseModel):
     pass
+
+    def __str__(self):
+        return self.name
 
 
 class Product(BaseModel):
@@ -42,3 +48,6 @@ class Product(BaseModel):
         related_name='products'
     )
     # reviews
+
+    def __str__(self):
+        return self.name

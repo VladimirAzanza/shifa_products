@@ -16,16 +16,24 @@ class Category(models.Model):
     )
 
 
+class Location(models.Model):
+    name = models.CharField(max_length=MAX_LENGTH_NAME)
+
+
 class Product(models.Model):
     name = models.CharField(max_length=MAX_LENGTH_NAME)
     description = models.TextField()
     image = models.ImageField(upload_to='products/images/')
+    is_available = models.BooleanField(default=True)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     category = models.ForeignKey(
         Category,
         related_name='products',
         on_delete=models.SET_NULL,
         null=True
-        )
-    # is_available
-    # location
+    )
+    location = models.ManyToManyField(
+        Location,
+        related_name='products'
+    )
     # reviews

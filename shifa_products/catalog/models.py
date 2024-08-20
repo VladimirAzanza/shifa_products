@@ -3,8 +3,14 @@ from django.db import models
 from .constants import MAX_LENGTH_NAME
 
 
-class Category(models.Model):
+class BaseModel(models.Model):
     name = models.CharField(max_length=MAX_LENGTH_NAME)
+
+    class Meta:
+        abstract = True
+
+
+class Category(BaseModel):
     slug = models.SlugField(
         unique=True,
         null=False,
@@ -16,12 +22,11 @@ class Category(models.Model):
     )
 
 
-class Location(models.Model):
-    name = models.CharField(max_length=MAX_LENGTH_NAME)
+class Location(BaseModel):
+    pass
 
 
-class Product(models.Model):
-    name = models.CharField(max_length=MAX_LENGTH_NAME)
+class Product(BaseModel):
     description = models.TextField()
     image = models.ImageField(upload_to='products/images/')
     is_available = models.BooleanField(default=True)

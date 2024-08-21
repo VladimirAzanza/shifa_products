@@ -15,4 +15,3 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = Product
     pk_url_kwarg = 'product_id'
-    template_name = 'catalog/product_detail.html'

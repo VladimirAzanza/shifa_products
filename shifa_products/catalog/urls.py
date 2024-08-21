@@ -15,4 +15,9 @@ urlpatterns = [
         views.ProductDetailView.as_view(),
         name='product_detail'
     ),
+    path(
+        '<int:product_id>/review/',
+        views.ReviewCreateView.as_view(),
+        name='review_form'
+    )
 ]

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Dejar una Reseña{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2>Dejar una Reseña para {{ product.name }}</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Enviar Reseña</button>
+  </form>
+
+  <div class="mt-4">
+    <a href="{% url 'catalog:product_detail' product.id %}" class="btn btn-secondary">Volver al producto</a>
+  </div>
+</div>
+{% endblock %}

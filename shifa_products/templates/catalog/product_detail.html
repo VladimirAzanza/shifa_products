@@ -18,8 +18,9 @@
   </div>
   <div class="mt-5">
     <h4>Reseñas</h4>
+    <a href="{% url 'catalog:review_form' product.id %}" class="btn btn-primary">Dejar una reseña</a>
     <ul class="list-unstyled">
-      {% for review in product.reviews %}
+      {% for review in reviews %}
       <li class="media mb-3">
         <img src="{{ review.user.profile_image.url }}" class="mr-3 rounded-circle" alt="{{ review.user.username }}" style="width: 50px;">
         <div class="media-body">

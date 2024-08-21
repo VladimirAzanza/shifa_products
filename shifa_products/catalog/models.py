@@ -85,3 +85,6 @@ class Review(models.Model):
                 name='unique_name_owner'
             )
         ]
+
+    def __str__(self):
+        return self.title

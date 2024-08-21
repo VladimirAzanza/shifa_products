@@ -1,6 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
-from .constants import MAX_LENGTH_NAME
+from .constants import MAX_LENGTH_NAME, MAX_LENGTH_REVIEW, MAX_LENGTH_TITLE
+
+
+User = get_user_model()
 
 
 class BaseModel(models.Model):
@@ -47,7 +51,37 @@ class Product(BaseModel):
         Location,
         related_name='products'
     )
-    # reviews
 
     def __str__(self):
         return self.name
+
+
+class Review(models.Model):
+    title = models.CharField(max_length=MAX_LENGTH_TITLE)
+    review = models.CharField(max_length=MAX_LENGTH_REVIEW)
+    date = models.DateTimeField(auto_now_add=True)
+    taste_stars = models.IntegerField(default=5)
+    quality_stars = models.IntegerField(default=5)
+    product = models.ForeignKey(
+        Product,
+        related_name='reviews',
+        on_delete=models.CASCADE
+    )
+    user = models.ForeignKey(
+        User,
+        related_name='reviews',
+        on_delete=models.CASCADE
+    )
+    location = models.ForeignKey(
+        Location,
+        on_delete=models.SET_NULL,
+        null=True
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['product', 'user'],
+                name='unique_name_owner'
+            )
+        ]

@@ -10,4 +10,9 @@ urlpatterns = [
         TemplateView.as_view(template_name='pages/index.html'),
         name='index'
     ),
+    path(
+        'about_us',
+        TemplateView.as_view(template_name='pages/contact.html'),
+        name='about_us'
+    ),
 ]

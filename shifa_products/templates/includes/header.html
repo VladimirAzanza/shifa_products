@@ -13,7 +13,7 @@
           <a class="nav-link" href="{% url 'catalog:product_list' %}">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contacto</a>
+          <a class="nav-link" href="{% url 'pages:about_us' %}">Contacto</a>
         </li>
         <li class="nav-item">
         {% if user.is_authenticated %}

@@ -15,6 +15,20 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contacto</a>
         </li>
+        <li class="nav-item">
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'pages:index' %}">Perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-danger ms-2" href="{% url 'logout' %}">Cerrar sesión</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="btn btn-primary ms-2" href="{% url 'login' %}">Iniciar sesión</a>
+          </li>
+        {% endif %}
+        </li>
       </ul>
     </div>
   </div>

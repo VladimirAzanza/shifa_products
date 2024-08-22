@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Registrarse</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+    </form>
+    <p class="mt-3">¿Ya tienes una cuenta? <a href="{% url 'auth:login' %}">Inicia sesión aquí</a></p>
+</div>
+{% endblock %}

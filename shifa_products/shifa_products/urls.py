@@ -19,8 +19,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+auth_urls = [
+    path('', include('django.contrib.auth.urls')),
+]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/', include(auth_urls)),
     path('catalog/', include('catalog.urls', namespace='catalog')),
     path('', include('pages.urls', namespace='pages')),
     path('users/', include('users.urls', namespace='users'))

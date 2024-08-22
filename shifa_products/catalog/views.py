@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -41,6 +42,10 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
     def get(self, request, *args, **kwargs):
         product = self.get_object()
         if Review.objects.filter(user=request.user, product=product):
+            messages.error(
+                request,
+                "Solo se permite una reseña por cliente para este producto."
+            )
             return redirect('catalog:product_detail', product_id=product.pk)
         return super().get(request, *args, **kwargs)
 

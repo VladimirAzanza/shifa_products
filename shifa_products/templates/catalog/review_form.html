@@ -8,7 +8,67 @@
 
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    
+    <!-- Campo para el título -->
+    <div class="mb-3">
+      <label for="id_title" class="form-label">Título</label>
+      <input type="text" name="title" maxlength="100" class="form-control" id="id_title">
+      {% if form.title.errors %}
+        <div class="text-danger">
+          {{ form.title.errors }}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Campo para la reseña -->
+    <div class="mb-3">
+      <label for="id_review" class="form-label">Reseña</label>
+      <textarea name="review" maxlength="1000" class="form-control" id="id_review"></textarea>
+      {% if form.review.errors %}
+        <div class="text-danger">
+          {{ form.review.errors }}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Campo para estrellas de sabor -->
+    <div class="mb-3">
+      <label for="id_taste_stars" class="form-label">Estrellas de Sabor</label>
+      <input type="number" name="taste_stars" value="5" class="form-control" id="id_taste_stars">
+      {% if form.taste_stars.errors %}
+        <div class="text-danger">
+          {{ form.taste_stars.errors }}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Campo para estrellas de calidad -->
+    <div class="mb-3">
+      <label for="id_quality_stars" class="form-label">Estrellas de Calidad</label>
+      <input type="number" name="quality_stars" value="5" class="form-control" id="id_quality_stars">
+      {% if form.quality_stars.errors %}
+        <div class="text-danger">
+          {{ form.quality_stars.errors }}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Campo para la ubicación -->
+    <div class="mb-3">
+      <label for="id_location" class="form-label">Ubicación</label>
+      <select name="location" class="form-control" id="id_location">
+        <!-- Aquí irían las opciones -->
+        {% for choice in form.location.field.choices %}
+            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+        {% endfor %}
+      </select>
+      {% if form.location.errors %}
+        <div class="text-danger">
+          {{ form.location.errors }}
+        </div>
+      {% endif %}
+    </div>
+
     <button type="submit" class="btn btn-primary">Enviar Reseña</button>
   </form>
 

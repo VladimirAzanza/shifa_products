@@ -49,5 +49,6 @@ class ReviewCreateView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy(
-            'catalog:product_detail', kwargs={'product_id': self.pk_url_kwarg}
+            'catalog:product_detail',
+            kwargs={'product_id': self.get_object().pk}
         )

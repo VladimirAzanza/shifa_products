@@ -10,4 +10,9 @@ urlpatterns = [
         views.ProfileDetailView.as_view(),
         name='profile'
     ),
+    path(
+        'profile/<slug:username>/update/',
+        views.ProfileUpdateView.as_view(),
+        name='profile_update'
+    ),
 ]

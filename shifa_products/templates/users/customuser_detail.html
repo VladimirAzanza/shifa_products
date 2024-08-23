@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="mt-4">
-        <a href="#" class="btn btn-primary">Editar Perfil</a>
+        <a href="{% url 'users:profile_update' user.username %}" class="btn btn-primary">Editar Perfil</a>
     </div>
 </div>
 {% endblock %}

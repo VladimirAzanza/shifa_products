@@ -1,30 +1,26 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView
 
+from .forms import UserForm
+from .mixin import GetUserMixin, OnlyAuthorMixin
 
 User = get_user_model()
 
 
-class ProfileDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
-    model = User
-    pk_url_kwarg = 'username'
-
-    def get_object(self):
-        username = self.kwargs.get(self.pk_url_kwarg)
-        return get_object_or_404(User, username=username)
-
-    def test_func(self):
-        object = self.get_object()
-        return self.request.user == object or self.request.user.is_staff
-
-    def handle_no_permission(self):
-        return HttpResponseRedirect(reverse_lazy('pages:index'))
-
+class ProfileDetailView(OnlyAuthorMixin, GetUserMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['address_user'] = self.get_object().addresses.all()
         return context
+
+
+class ProfileUpdateView(OnlyAuthorMixin, GetUserMixin, UpdateView):
+    form_class = UserForm
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'users:profile',
+            kwargs={'username': self.get_object().username}
+        )

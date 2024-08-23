@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Actualizar Perfil{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>Actualizar Perfil</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Mostrar errores del formulario, si hay -->
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <strong>Por favor corrige los errores a continuación:</strong>
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ field.label }}: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        <!-- Mostrar mensajes de éxito -->
+        {% if messages %}
+            <div class="alert alert-info">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <!-- Campos del formulario -->
+        <div class="mb-3">
+            <label for="{{ form.username.id_for_label }}" class="form-label">Nombre de Usuario</label>
+            {{ form.username }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="{{ form.first_name.id_for_label }}" class="form-label">Nombre</label>
+            {{ form.first_name }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="{{ form.last_name.id_for_label }}" class="form-label">Apellido</label>
+            {{ form.last_name }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+            {{ form.email }}
+        </div>
+        
+        <!-- Botones -->
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a href="{% url 'users:profile' object.username %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

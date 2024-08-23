@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -24,12 +25,15 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['reviews'] = self.get_object().reviews.all()
+        paginator = Paginator(self.get_object().reviews.all(), 3)
+        page = self.request.GET.get('page')
+        context['reviews'] = paginator.get_page(page)
         return context
 
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
+
     form_class = ReviewForm
     pk_url_kwarg = 'product_id'
 
@@ -64,3 +68,5 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
             'catalog:product_detail',
             kwargs={'product_id': self.get_object().pk}
         )
+
+# ReviewListView

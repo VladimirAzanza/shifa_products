@@ -34,7 +34,6 @@ class ProductDetailView(DetailView):
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
-
     form_class = ReviewForm
     pk_url_kwarg = 'product_id'
 

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Agregar Dirección
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="form-container">
+        <h2 class="mb-4">Agregar Dirección</h2>
+
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_location" class="form-label">Ubicación</label>
+                <select name="location" id="id_location" class="form-select" required>
+                    {% for location in form.location.field.queryset %}
+                        <option value="{{ location.id }}" {% if location.id == form.location.value %}selected{% endif %}>{{ location.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="id_street" class="form-label">Dirección</label>
+                <input type="text" name="street" id="id_street" class="form-control" value="{{ form.street.value }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_postal_code" class="form-label">Código Postal</label>
+                <input type="text" name="postal_code" id="id_postal_code" class="form-control" value="{{ form.postal_code.value }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar Dirección</button>
+        </form>
+        
+        <a href="{% url 'users:profile' request.user.username %}" class="btn btn-secondary mt-3">Volver al Perfil</a>
+    </div>
+</div>
+{% endblock %}

@@ -7,7 +7,8 @@ from django.views.generic import (
     CreateView,
     DetailView,
     ListView,
-    UpdateView
+    UpdateView,
+    DeleteView
 )
 
 from .constants import MAX_REVIEWS_MESSAGE
@@ -89,4 +90,13 @@ class ReviewUpdateView(OnlyAuthorMixin, UpdateView):
             kwargs={'product_id': self.object.product.pk}
         )
 
-# ReviewDeleteView
+
+class ReviewDeleteView(OnlyAuthorMixin, DeleteView):
+    model = Review
+    pk_url_kwarg = 'review_id'
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'catalog:product_detail',
+            kwargs={'product_id': self.object.product.pk}
+        )

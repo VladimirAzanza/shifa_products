@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Eliminación{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2>¿Estás seguro de que quieres eliminar esta reseña para {{ review.product.name }}?</h2>
+  <p>
+    Esta acción no se puede deshacer. La reseña será eliminada permanentemente.
+  </p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'catalog:product_detail' review.product.id %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

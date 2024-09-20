@@ -19,5 +19,10 @@ urlpatterns = [
         '<int:product_id>/review/',
         views.ReviewCreateView.as_view(),
         name='review_form'
+    ),
+    path(
+        '<int:product_id>/review/<int:review_id>',
+        views.ReviewUpdateView.as_view(),
+        name='review_update'
     )
 ]

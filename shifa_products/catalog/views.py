@@ -7,10 +7,12 @@ from django.views.generic import (
     CreateView,
     DetailView,
     ListView,
+    UpdateView
 )
 
 from .constants import MAX_REVIEWS_MESSAGE
 from .forms import ReviewForm
+from .mixins import OnlyAuthorMixin
 from .models import Product, Review
 
 
@@ -67,6 +69,24 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         return reverse_lazy(
             'catalog:product_detail',
             kwargs={'product_id': self.get_object().pk}
+        )
+
+
+class ReviewUpdateView(OnlyAuthorMixin, UpdateView):
+    model = Review
+    pk_url_kwarg = 'review_id'
+    template_name = 'catalog/review_form.html'
+    form_class = ReviewForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product'] = self.object.product
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'catalog:product_detail',
+            kwargs={'product_id': self.object.product.pk}
         )
 
 # ReviewDeleteView

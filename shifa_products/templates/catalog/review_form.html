@@ -10,7 +10,7 @@
     {% csrf_token %}
     <div class="mb-3">
       <label for="id_title" class="form-label">Título</label>
-      <input type="text" name="title" maxlength="100" class="form-control" id="id_title">
+      <input type="text" name="title" maxlength="100" class="form-control" id="id_title" value="{{ form.title.value|default:'' }}">
       {% if form.title.errors %}
         <div class="text-danger">
           {{ form.title.errors }}
@@ -19,7 +19,7 @@
     </div>
     <div class="mb-3">
       <label for="id_review" class="form-label">Reseña</label>
-      <textarea name="review" maxlength="1000" class="form-control" id="id_review"></textarea>
+      <textarea name="review" maxlength="1000" class="form-control" id="id_review">{{ form.review.value|default:''}}</textarea>
       {% if form.review.errors %}
         <div class="text-danger">
           {{ form.review.errors }}
@@ -28,7 +28,7 @@
     </div>
     <div class="mb-3">
       <label for="id_taste_stars" class="form-label">Estrellas de Sabor</label>
-      <input type="number" name="taste_stars" value="5" class="form-control" id="id_taste_stars">
+      <input type="number" name="taste_stars" value="{{ form.taste_stars.value|default:"5" }}" class="form-control" id="id_taste_stars">
       {% if form.taste_stars.errors %}
         <div class="text-danger">
           {{ form.taste_stars.errors }}
@@ -37,7 +37,7 @@
     </div>
     <div class="mb-3">
       <label for="id_quality_stars" class="form-label">Estrellas de Calidad</label>
-      <input type="number" name="quality_stars" value="5" class="form-control" id="id_quality_stars">
+      <input type="number" name="quality_stars" value="{{ form.quality_stars.value|default:"5" }}" class="form-control" id="id_quality_stars">
       {% if form.quality_stars.errors %}
         <div class="text-danger">
           {{ form.quality_stars.errors }}

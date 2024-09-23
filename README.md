@@ -3,7 +3,7 @@
 
 This is a work in progress of Shifa Products marketplace using Python-Django as backend with Bootstrapp Frontend.
 
-Shifa Products is an online marketplace designed to sell medicinal products, allow customers to leave reviews and rate the products.
+Shifa Products is an Freelance project designed to sell medicinal products, allow customers to leave reviews and rate the products.
 
 To write this project, I needed to understand concepts such as: MVT architecture, backend development, url routing, Object-Relation Mapping(Django ORM), static files management, Django templates.
 

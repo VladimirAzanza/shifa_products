@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from django.db.models import Count
+from django.db.models import Avg, Count
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -29,7 +29,11 @@ class ProductDetailView(DetailView):
     pk_url_kwarg = 'product_id'
 
     def get_queryset(self):
-        return Product.objects.annotate(review_count=Count('reviews'))
+        return Product.objects.annotate(
+            avg_quality_stars=Avg('reviews__quality_stars'),
+            avg_taste_stars=Avg('reviews__taste_stars'),
+            review_count=Count('reviews')
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

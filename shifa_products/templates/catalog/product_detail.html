@@ -13,6 +13,26 @@
       <p class="text-primary">{{ product.price }} USD</p>
       <p><strong>Categoría:</strong> {{ product.category }}</p>
       <p>{{ product.description }}</p>
+      <p>
+        <strong>Calidad : </strong>
+        {% for i in "12345" %}
+          {% if forloop.counter <= product.avg_quality_stars %}
+            <i class="bi bi-star-fill text-warning"></i>
+          {% else %}
+            <i class="bi bi-star text-warning"></i>
+          {% endif %}
+        {% endfor %}
+      </p>
+      <p>
+        <strong>Sabor : </strong>
+        {% for i in "12345" %}
+          {% if forloop.counter <= product.avg_taste_stars %}
+            <i class="bi bi-star-fill text-warning"></i>
+          {% else %}
+            <i class="bi bi-star text-warning"></i>
+          {% endif %}
+        {% endfor %}
+      </p>
       <a href="#" class="btn btn-success btn-lg">Comprar Ahora</a>
     </div>
   </div>

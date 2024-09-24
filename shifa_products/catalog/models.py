@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from .constants import MAX_LENGTH_NAME, MAX_LENGTH_REVIEW, MAX_LENGTH_TITLE
@@ -60,8 +61,12 @@ class Review(models.Model):
     title = models.CharField(max_length=MAX_LENGTH_TITLE)
     review = models.CharField(max_length=MAX_LENGTH_REVIEW)
     date = models.DateTimeField(auto_now_add=True)
-    taste_stars = models.IntegerField(default=5)
-    quality_stars = models.IntegerField(default=5)
+    taste_stars = models.IntegerField(
+        default=5, validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
+    quality_stars = models.IntegerField(
+        default=5, validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
     product = models.ForeignKey(
         Product,
         related_name='reviews',

@@ -16,12 +16,15 @@
           <a class="nav-link" href="{% url 'pages:about_us' %}">Contacto</a>
         </li>
         <li class="nav-item">
-        {% if user.is_authenticated %}
+          {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'users:profile' user.username %}">Perfil</a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-danger ms-2" href="{% url 'logout' %}">Cerrar sesión</a>
+            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger ms-2">Cerrar sesión</button>
+            </form>
           </li>
         {% else %}
           <li class="nav-item">

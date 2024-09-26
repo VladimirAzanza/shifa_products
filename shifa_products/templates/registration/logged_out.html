@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm p-4 text-center">
+                <h2 class="card-title mb-4">Has cerrado sesión</h2>
+                <p class="mb-4">¡Gracias por visitarnos! Esperamos verte de nuevo pronto.</p>
+                <div class="mb-3">
+                    <a href="{% url 'login' %}" class="btn btn-primary w-100">Iniciar sesión de nuevo</a>
+                </div>
+                <div class="text-center mt-3">
+                    <p class="mb-0">¿No tienes una cuenta? <a href="{% url 'registration' %}">Regístrate aquí</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

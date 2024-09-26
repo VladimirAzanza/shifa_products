@@ -7,8 +7,6 @@
     <h2>Actualizar Perfil</h2>
     <form method="post">
         {% csrf_token %}
-        
-        <!-- Mostrar errores del formulario, si hay -->
         {% if form.errors %}
             <div class="alert alert-danger">
                 <strong>Por favor corrige los errores a continuación:</strong>
@@ -24,8 +22,6 @@
                 </ul>
             </div>
         {% endif %}
-        
-        <!-- Mostrar mensajes de éxito -->
         {% if messages %}
             <div class="alert alert-info">
                 {% for message in messages %}
@@ -33,29 +29,25 @@
                 {% endfor %}
             </div>
         {% endif %}
-        
-        <!-- Campos del formulario -->
         <div class="mb-3">
             <label for="{{ form.username.id_for_label }}" class="form-label">Nombre de Usuario</label>
-            {{ form.username }}
+            <input type="text" name="username" id="{{ form.username.id_for_label }}" class="form-control" value="{{ form.username.value }}" required>
         </div>
         
         <div class="mb-3">
             <label for="{{ form.first_name.id_for_label }}" class="form-label">Nombre</label>
-            {{ form.first_name }}
+            <input type="text" name="first_name" id="{{ form.first_name.id_for_label }}" class="form-control" value="{{ form.first_name.value }}" required>
         </div>
         
         <div class="mb-3">
             <label for="{{ form.last_name.id_for_label }}" class="form-label">Apellido</label>
-            {{ form.last_name }}
+            <input type="text" name="last_name" id="{{ form.last_name.id_for_label }}" class="form-control" value="{{ form.last_name.value }}" required>
         </div>
         
         <div class="mb-3">
             <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
-            {{ form.email }}
+            <input type="text" name="email" id="{{ form.email.id_for_label }}" class="form-control" value="{{ form.email.value }}" required>
         </div>
-        
-        <!-- Botones -->
         <button type="submit" class="btn btn-primary">Actualizar</button>
         <a href="{% url 'users:profile' object.username %}" class="btn btn-secondary">Cancelar</a>
     </form>

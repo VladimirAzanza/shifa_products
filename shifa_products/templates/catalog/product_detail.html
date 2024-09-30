@@ -33,7 +33,11 @@
           {% endif %}
         {% endfor %}
       </p>
-      <a href="#" class="btn btn-success btn-lg">Comprar Ahora</a>
+      <form action="{% url 'cart:add_to_cart' product.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success btn-lg" type="submit">Comprar Ahora</button>
+      </form>
     </div>
   </div>
   <div class="container mt-5">

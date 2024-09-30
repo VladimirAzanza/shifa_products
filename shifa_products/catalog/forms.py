@@ -1,5 +1,4 @@
 from django import forms
-from django.urls import reverse_lazy
 
 from .models import Review
 from .validators import validate_stars

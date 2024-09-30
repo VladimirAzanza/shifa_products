@@ -20,11 +20,12 @@ auth_urls = [
 ]
 
 urlpatterns = [
+    path('', include('pages.urls', namespace='pages')),
     path('admin/', admin.site.urls),
     path('auth/', include(auth_urls)),
     path('catalog/', include('catalog.urls', namespace='catalog')),
-    path('', include('pages.urls', namespace='pages')),
-    path('users/', include('users.urls', namespace='users'))
+    path('users/', include('users.urls', namespace='users')),
+    path('cart/', include('cart.urls', namespace='cart'))
 ]
 
 if settings.DEBUG:

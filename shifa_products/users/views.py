@@ -6,7 +6,6 @@ from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
 from .forms import AddressUserForm, UserUpdateForm
 from .mixin import GetUserMixin, OnlyAuthorMixin
-from .models import AddressUser
 
 User = get_user_model()
 

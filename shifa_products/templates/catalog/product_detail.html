@@ -33,10 +33,17 @@
           {% endif %}
         {% endfor %}
       </p>
-      <form action="{% url 'cart:add_to_cart' product.id %}" method="post">
+      <form action="{% url 'cart:add_to_cart' product.id %}" method="post" class="d-flex align-items-center">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-success btn-lg" type="submit">Comprar Ahora</button>
+        <div class="input-group me-2" style="width: 100px;">
+          <span class="input-group-text">
+            <i class="bi bi-cart"></i>
+          </span>
+          <input type="number" name="quantity" min="1" value="1" class="form-control text-center" required>
+        </div>
+        <button class="btn btn-success" type="submit">
+          <i class="bi bi-plus"></i> Agregar a carrito
+        </button>
       </form>
     </div>
   </div>

@@ -27,4 +27,6 @@ class CartItem(models.Model):
         related_name='cart_item',
         on_delete=models.CASCADE
     )
-    quantity = models.PositiveSmallIntegerField(default=1) #verbose name?
+    quantity = models.PositiveSmallIntegerField(
+        default=1, verbose_name='Cantidad'
+    )

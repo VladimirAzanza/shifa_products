@@ -8,8 +8,4 @@ class OnlyAuthorMixin(UserPassesTestMixin):
         return self.get_object().user == self.request.user
 
     def handle_no_permission(self):
-        return HttpResponseRedirect(
-            reverse_lazy(
-                'blog:post_detail', kwargs={'post_id': self.kwargs['post_id']}
-            )
-        )
+        return HttpResponseRedirect(reverse_lazy('catalog:product_list'))

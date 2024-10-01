@@ -19,6 +19,7 @@ class Cart(models.Model):
 class CartItem(models.Model):
     cart = models.ForeignKey(
         Cart,
+        related_name='cart_item',
         on_delete=models.CASCADE
     )
     product = models.ForeignKey(
@@ -26,4 +27,4 @@ class CartItem(models.Model):
         related_name='cart_item',
         on_delete=models.CASCADE
     )
-    quantity = models.PositiveSmallIntegerField(default=1)
+    quantity = models.PositiveSmallIntegerField(default=1) #verbose name?

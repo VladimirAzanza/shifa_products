@@ -1,12 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest
-from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from .forms import AddToCartForm
 from .models import Cart, CartItem
+from catalog.mixins import OnlyAuthorMixin
 from catalog.models import Product
 
 
@@ -37,3 +36,16 @@ class AddToCartCreateView(LoginRequiredMixin, CreateView):
             'catalog:product_detail',
             kwargs={'product_id': self.object.product.pk}
         )
+
+
+class CartDetailView(OnlyAuthorMixin, DetailView):
+    def get_object(self, queryset=None):
+        return get_object_or_404(
+            Cart,
+            user=self.request.user
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cart_item'] = self.get_object().cart_item.all()
+        return context

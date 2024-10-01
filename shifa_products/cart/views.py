@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import F
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
@@ -47,5 +48,7 @@ class CartDetailView(OnlyAuthorMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cart_item'] = self.get_object().cart_item.all()
+        context['cart_item'] = self.get_object().cart_item.annotate(
+            total_item=F('quantity') * F('product__price')
+        )
         return context

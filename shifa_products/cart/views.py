@@ -64,3 +64,9 @@ class CartItemUpdateView(OnlyAuthorCartItemMixin, UpdateView):
         return reverse_lazy('cart:cart')
 
 
+class CartItemDeleteView(OnlyAuthorCartItemMixin, DeleteView):
+    model = CartItem
+    pk_url_kwarg = 'cart_item_id'
+
+    def get_success_url(self):
+        return reverse_lazy('cart:cart')

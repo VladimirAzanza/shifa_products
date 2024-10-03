@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Producto del Carrito{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4">Eliminar Producto del Carrito</h2>
+    <p>¿Estás seguro de que deseas eliminar el siguiente producto de tu carrito?</p>
+    <div class="alert alert-warning">
+        <strong>Producto:</strong> {{ object.product.name }}<br>
+        <strong>Cantidad:</strong> {{ object.quantity }}<br>
+        <strong>Precio:</strong> {{ object.product.price|floatformat:2 }} USD
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="d-flex justify-content-end mt-3">
+            <a href="{% url 'cart:cart' %}" class="btn btn-secondary me-2">Cancelar</a>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

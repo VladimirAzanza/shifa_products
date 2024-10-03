@@ -19,5 +19,10 @@ urlpatterns = [
         'item/<int:cart_item_id>/',
         views.CartItemUpdateView.as_view(),
         name='update_cart_item'
+    ),
+    path(
+        'item/<int:cart_item_id>/delete',
+        views.CartItemDeleteView.as_view(),
+        name='delete_cart_item'
     )
 ]

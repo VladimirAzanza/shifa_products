@@ -47,18 +47,18 @@
       </form>
     </div>
   </div>
+  {% if messages %}
+    <div class="container mt-3">
+      {% for message in messages %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
   <div class="container mt-5">
     <h4 class="mb-4">Reseñas ({{ product.review_count }}) </h4>
     <a href="{% url 'catalog:review_form' product.id %}" class="btn btn-primary mb-4">Dejar una reseña</a>
-    {% if messages %}
-      <div class="container mt-3">
-        {% for message in messages %}
-          <div class="alert alert-info alert-dismissible fade show" role="alert">
-            {{ message }}
-          </div>
-        {% endfor %}
-      </div>
-    {% endif %}
     <ul class="list-unstyled">
       {% for review in reviews %}
       <li class="review-card mb-4 p-3 border rounded">

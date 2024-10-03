@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import F
 from django.shortcuts import get_object_or_404
@@ -9,6 +10,8 @@ from .mixins import OnlyAuthorCartItemMixin
 from .models import Cart, CartItem
 from catalog.mixins import OnlyAuthorMixin
 from catalog.models import Product
+
+from .constants import SUCCESFUL_ADD_T0_CART_MESSAGE
 
 
 class AddToCartCreateView(LoginRequiredMixin, CreateView):
@@ -31,6 +34,7 @@ class AddToCartCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.product = self.product
         form.instance.cart = self.cart
+        messages.success(self.request, SUCCESFUL_ADD_T0_CART_MESSAGE)
         return super().form_valid(form)
 
     def get_success_url(self):

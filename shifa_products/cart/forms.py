@@ -3,7 +3,7 @@ from django import forms
 from .models import Cart, CartItem
 
 
-class AddToCartForm(forms.ModelForm):
+class CartItemForm(forms.ModelForm):
     class Meta:
         model = CartItem
         fields = ('quantity',)

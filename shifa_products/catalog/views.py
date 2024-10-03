@@ -16,7 +16,7 @@ from .constants import MAX_REVIEWS_MESSAGE
 from .forms import ReviewForm
 from .mixins import OnlyAuthorMixin
 from .models import Product, Review
-from cart.forms import AddToCartForm
+from cart.forms import CartItemForm
 
 
 class ProductListView(ListView):
@@ -41,7 +41,7 @@ class ProductDetailView(DetailView):
         paginator = Paginator(self.get_object().reviews.all(), 3)
         page = self.request.GET.get('page')
         context['reviews'] = paginator.get_page(page)
-        context['form'] = AddToCartForm()
+        context['form'] = CartItemForm()
         return context
 
 

@@ -15,5 +15,9 @@ urlpatterns = [
         views.AddToCartCreateView.as_view(),
         name='add_to_cart'
     ),
-    
+    path(
+        'item/<int:cart_item_id>/',
+        views.CartUpdateView.as_view(),
+        name='update_cart_item'
+    )
 ]

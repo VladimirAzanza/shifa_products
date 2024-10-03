@@ -13,6 +13,7 @@
           <th>Cantidad</th>
           <th>Precio (USD)</th>
           <th>Total (USD)</th>
+          <th> </th>
         </tr>
       </thead>
       <tbody>
@@ -21,7 +22,10 @@
           <td>{{ item.product.name }}</td>
           <td>{{ item.quantity }}</td>
           <td>{{ item.product.price }}</td>
-          <td>{{ item.total_item }}</td>
+          <td>{{ item.total_item|floatformat:2 }}</td>
+          <td>
+            <a href="{% url 'cart:update_cart_item' item.id %}" class="btn btn-sm btn-warning">Editar</a>
+            
         </tr>
         {% endfor %}
       </tbody>

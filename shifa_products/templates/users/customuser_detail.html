@@ -16,10 +16,12 @@
       </div>
     </div>
     <div class="col-md-6">
-      <p><strong>Dirección de entrega:</strong>
+      <p><strong>Direcciones asociadas para la entrega:</strong>
         {% if address_user %}
           {% for address in address_user %}
-            {{ address.location }}, {{ address.street }}, {{ address.postal_code }}
+            <div class="address-item">
+              <p>{{ address.location }}, {{ address.street }}, {{ address.postal_code }}</p>
+            </div>
           {% endfor %}
         {% else %}
           No se ha registrado una dirección.

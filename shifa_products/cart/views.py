@@ -56,7 +56,7 @@ class CartDetailView(OnlyAuthorMixin, DetailView):
         context['cart_item'] = self.get_object().cart_item.annotate(
             total_item=F('quantity') * F('product__price')
         )
-        context['addresses'] = self.request.user.addresses.all()git 
+        context['addresses'] = self.request.user.addresses.all()
         return context
 
 

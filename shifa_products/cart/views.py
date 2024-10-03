@@ -55,10 +55,12 @@ class CartDetailView(OnlyAuthorMixin, DetailView):
         return context
 
 
-class CartUpdateView(OnlyAuthorCartItemMixin, UpdateView):
+class CartItemUpdateView(OnlyAuthorCartItemMixin, UpdateView):
     model = CartItem
     pk_url_kwarg = 'cart_item_id'
     form_class = CartItemForm
 
     def get_success_url(self):
         return reverse_lazy('cart:cart')
+
+

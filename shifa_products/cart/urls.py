@@ -17,7 +17,7 @@ urlpatterns = [
     ),
     path(
         'item/<int:cart_item_id>/',
-        views.CartUpdateView.as_view(),
+        views.CartItemUpdateView.as_view(),
         name='update_cart_item'
     )
 ]

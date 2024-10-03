@@ -86,7 +86,6 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
 class ReviewUpdateView(OnlyAuthorMixin, UpdateView):
     model = Review
     pk_url_kwarg = 'review_id'
-    template_name = 'catalog/review_form.html'
     form_class = ReviewForm
 
     def get_context_data(self, **kwargs):

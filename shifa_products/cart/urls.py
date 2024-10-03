@@ -14,5 +14,6 @@ urlpatterns = [
         'add_to_cart/<int:product_id>/',
         views.AddToCartCreateView.as_view(),
         name='add_to_cart'
-    )
+    ),
+    
 ]

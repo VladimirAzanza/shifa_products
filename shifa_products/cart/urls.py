@@ -6,7 +6,7 @@ app_name = 'cart'
 
 urlpatterns = [
     path(
-        '',
+        'cart/',
         views.CartDetailView.as_view(),
         name='cart'
     ),
@@ -14,6 +14,11 @@ urlpatterns = [
         'add_to_cart/<int:product_id>/',
         views.AddToCartCreateView.as_view(),
         name='add_to_cart'
+    ),
+    path(#corregir el checkout
+        'cart/checkout/',
+        views.AddToCartCreateView.as_view(),
+        name='checkout'
     ),
     path(
         'item/<int:cart_item_id>/',
@@ -24,5 +29,5 @@ urlpatterns = [
         'item/<int:cart_item_id>/delete',
         views.CartItemDeleteView.as_view(),
         name='delete_cart_item'
-    )
+    ),
 ]

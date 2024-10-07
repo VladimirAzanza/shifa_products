@@ -15,11 +15,6 @@ urlpatterns = [
         views.AddToCartCreateView.as_view(),
         name='add_to_cart'
     ),
-    path(#corregir el checkout
-        'cart/checkout/',
-        views.AddToCartCreateView.as_view(),
-        name='checkout'
-    ),
     path(
         'item/<int:cart_item_id>/',
         views.CartItemUpdateView.as_view(),

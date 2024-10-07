@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Dirección{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4">Eliminar Dirección</h2>
+    <p>¿Estás seguro de que deseas eliminar la siguiente dirección?</p>
+    <div class="alert alert-warning">
+        <strong>Dirección:</strong> {{ object }}<br>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="d-flex justify-content-end mt-3">
+            <a href="{% url 'users:profile' object.user.username  %}" class="btn btn-secondary me-2">Cancelar</a>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

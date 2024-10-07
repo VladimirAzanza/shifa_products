@@ -20,4 +20,10 @@ urlpatterns = [
         views.AddressUserCreateView.as_view(),
         name='address_create'
     ),
+    path(
+        'profile/delete_address/<int:address_id>/',
+        views.AddressUserDeleteView.as_view(),
+        name='address_delete'
+    ),
+
 ]

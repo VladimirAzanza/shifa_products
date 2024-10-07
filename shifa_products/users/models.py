@@ -20,6 +20,5 @@ class AddressUser(models.Model):
 
     def __str__(self):
         return (
-            f'{self.user.username} -'
             f'{self.location}, {self.street}, {self.postal_code}'
         )

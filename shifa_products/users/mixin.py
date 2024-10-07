@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 
+from .models import CustomUser
+
 User = get_user_model()
 
 
@@ -19,7 +21,14 @@ class GetUserMixin():
 class OnlyAuthorMixin(LoginRequiredMixin, UserPassesTestMixin):
     def test_func(self):
         object = self.get_object()
-        return self.request.user == object or self.request.user.is_staff
+        if isinstance(object, CustomUser):
+            return (
+                self.request.user == object or self.request.user.is_staff
+            )
+        else:
+            return (
+                self.request.user == object.user or self.request.user.is_staff
+            )
 
     def handle_no_permission(self):
         return HttpResponseRedirect(reverse_lazy('pages:index'))

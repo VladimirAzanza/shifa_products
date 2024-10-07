@@ -45,5 +45,12 @@ class AddressUserCreateView(LoginRequiredMixin, CreateView):
         )
 
 
-class AddressUserDeleteView(DeleteView):
-    pass
+class AddressUserDeleteView(OnlyAuthorMixin, DeleteView):
+    model = AddressUser
+    pk_url_kwarg = 'address_id'
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'users:profile',
+            kwargs={'username': self.request.user.username}
+        )

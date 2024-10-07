@@ -19,8 +19,11 @@
       <p><strong>Direcciones asociadas para la entrega:</strong>
         {% if address_user %}
           {% for address in address_user %}
-            <div class="address-item">
+            <div class="address-item d-flex justify-content-between align-items-center">
               <p>{{ address.location }}, {{ address.street }}, {{ address.postal_code }}</p>
+              <div class="text-end">
+                <a href="{% url 'users:address_delete' address.id %}" class="btn btn-sm btn-warning">Eliminar dirección</a>
+              </div>
             </div>
           {% endfor %}
         {% else %}

@@ -16,7 +16,7 @@ urlpatterns = [
         name='profile_update'
     ),
     path(
-        'profile/<int:pk>/create_address/',
+        'profile/create_address/',
         views.AddressUserCreateView.as_view(),
         name='address_create'
     ),

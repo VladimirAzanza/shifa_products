@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 from .forms import OrderForm
@@ -15,6 +16,9 @@ class OrderCreateView(CreateView):
             CartItem, cart__user=self.request.user
         )
         form.instance.cart_item = cart_item
-        cart_item.delete()
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse_lazy(
+            'pages:index'
+        )

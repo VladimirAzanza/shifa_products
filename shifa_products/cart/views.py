@@ -8,10 +8,10 @@ from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from .forms import CartItemForm
 from .mixins import OnlyAuthorCartItemMixin
 from .models import Cart, CartItem
+from .constants import SUCCESFUL_ADD_T0_CART_MESSAGE
 from catalog.mixins import OnlyAuthorMixin
 from catalog.models import Product
-
-from .constants import SUCCESFUL_ADD_T0_CART_MESSAGE
+from orders.forms import OrderForm
 
 
 class AddToCartCreateView(LoginRequiredMixin, CreateView):

@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 from cart.models import CartItem
-from catalog.models import Product
+from users.models import AddressUser
 
 
 class Order(models.Model):
@@ -10,5 +10,10 @@ class Order(models.Model):
         CartItem,
         on_delete=models.CASCADE,
         related_name='order'
+    )
+    address = models.ForeignKey(
+        AddressUser,
+        on_delete=models.CASCADE,
+        related_name='orders'
     )
     created_at = models.DateTimeField(auto_now_add=True)

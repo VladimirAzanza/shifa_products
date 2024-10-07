@@ -14,6 +14,7 @@ class Order(models.Model):
     address = models.ForeignKey(
         AddressUser,
         on_delete=models.CASCADE,
-        related_name='orders'
+        related_name='order',
+        null=True
     )
     created_at = models.DateTimeField(auto_now_add=True)

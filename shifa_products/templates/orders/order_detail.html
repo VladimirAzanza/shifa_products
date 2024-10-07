@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalles de la Orden{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2>Detalles de la Orden #{{ order.id }}</h2>
+  
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <h4>Información del Cliente</h4>
+      <p><strong>Nombre de usuario:</strong> {{ order.cart_item.cart.user.username }}</p>
+      <p><strong>Nombre:</strong> {{ order.cart_item.cart.user.first_name }} {{ order.cart_item.cart.user.last_name }} </p>
+      <p><strong>Email:</strong> {{ order.cart_item.cart.user.email }}</p>
+    </div>
+    <div class="col-md-6">
+      <h4>Estado de la Orden</h4>
+      <p><strong>Estado:</strong> {{ order.get_status_display }}</p>
+      <p><strong>Fecha:</strong> {{ order.created_at }}</p>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h4>Artículos en la Orden</h4>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <p><strong>Producto:</strong> {{ order.cart_item.product.name }}</p>
+        <p><strong>Cantidad:</strong> {{ order.cart_item.quantity }}</p>
+        <p><strong>Precio Unitario:</strong> {{ order.cart_item.product.price }} USD</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="mt-4">
+    <h4>Total de la Orden</h4>
+    <p><strong>Total:</strong> - USD</p>
+  </div>
+
+  <div class="mt-5">
+    <a href="{% url 'cart:cart' %}" class="btn btn-secondary">Volver a la lista de órdenes</a>
+  </div>
+
+  {% if messages %}
+    <div class="container mt-3">
+      {% for message in messages %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

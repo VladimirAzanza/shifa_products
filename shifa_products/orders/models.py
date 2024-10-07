@@ -6,6 +6,7 @@ from users.models import AddressUser
 
 
 class Order(models.Model):
+    #cart on delete=change
     cart_item = models.OneToOneField(
         CartItem,
         on_delete=models.CASCADE,

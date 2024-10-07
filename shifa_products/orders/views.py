@@ -20,5 +20,11 @@ class OrderCreateView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy(
-            'pages:index'
+            'orders:order_detail',
+            kwargs={'order_id': self.object.pk}
         )
+
+
+class OrderDetailView(DetailView):
+    model = Order
+    pk_url_kwarg = 'order_id'

@@ -4,7 +4,7 @@ from django.views.generic import CreateView, DetailView
 
 from .forms import OrderForm
 from .models import Order
-from cart.models import CartItem
+from cart.models import Cart, CartItem
 
 
 class OrderCreateView(CreateView):
@@ -12,10 +12,10 @@ class OrderCreateView(CreateView):
     form_class = OrderForm
 
     def form_valid(self, form):
-        cart_item = get_object_or_404(
-            CartItem, cart__user=self.request.user
+        cart = get_object_or_404(
+            Cart, user=self.request.user
         )
-        form.instance.cart_item = cart_item
+        form.instance.cart = cart
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -28,3 +28,9 @@ class OrderCreateView(CreateView):
 class OrderDetailView(DetailView):
     model = Order
     pk_url_kwarg = 'order_id'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart = self.object.cart
+        context['cart_items'] = CartItem.objects.filter(cart=cart)
+        return context

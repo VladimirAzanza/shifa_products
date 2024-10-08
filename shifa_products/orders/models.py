@@ -1,16 +1,16 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from cart.models import CartItem
+from cart.models import Cart
 from users.models import AddressUser
 
 
 class Order(models.Model):
-    #cart on delete=change
-    cart_item = models.OneToOneField(
-        CartItem,
+    cart = models.OneToOneField(
+        Cart,
         on_delete=models.CASCADE,
-        related_name='order'
+        related_name='order',
+        null=True
     )
     address = models.ForeignKey(
         AddressUser,

@@ -9,9 +9,9 @@
   <div class="row mt-4">
     <div class="col-md-6">
       <h4>Información del Cliente</h4>
-      <p><strong>Nombre de usuario:</strong> {{ order.cart_item.cart.user.username }}</p>
-      <p><strong>Nombre:</strong> {{ order.cart_item.cart.user.first_name }} {{ order.cart_item.cart.user.last_name }} </p>
-      <p><strong>Email:</strong> {{ order.cart_item.cart.user.email }}</p>
+      <p><strong>Nombre de usuario:</strong> {{ order.cart.user.username }}</p>
+      <p><strong>Nombre:</strong> {{ order.cart.user.first_name }} {{ order.cart_item.cart.user.last_name }} </p>
+      <p><strong>Email:</strong> {{ order.cart.user.email }}</p>
     </div>
     <div class="col-md-6">
       <h4>Estado de la Orden</h4>
@@ -22,13 +22,19 @@
 
   <div class="mt-4">
     <h4>Artículos en la Orden</h4>
-    <ul class="list-group">
-      <li class="list-group-item">
-        <p><strong>Producto:</strong> {{ order.cart_item.product.name }}</p>
-        <p><strong>Cantidad:</strong> {{ order.cart_item.quantity }}</p>
-        <p><strong>Precio Unitario:</strong> {{ order.cart_item.product.price }} USD</p>
-      </li>
-    </ul>
+    {% if cart_items %}
+      <div class="container mt-3">
+        {% for item in cart_items %}
+          <ul class="list-group">
+            <li class="list-group-item">
+              <p><strong>Producto:</strong> {{ item.product.name }}</p>
+              <p><strong>Cantidad:</strong> {{ item.quantity }}</p>
+              <p><strong>Precio Unitario:</strong> {{ item.product.price }} USD</p>
+            </li>
+          </ul>
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 
   <div class="mt-4">

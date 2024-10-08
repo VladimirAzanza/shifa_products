@@ -6,7 +6,7 @@
 <div class="container my-5">
   <div class="row">
     <div class="col-md-6">
-      <h2>{{ object.username }}</h2>
+      <h4>Perfil de {{ object.username }}</h2>
       <p><strong>Nombre Completo:</strong> {{ object.get_full_name }}</p>
       <p><strong>Email:</strong> {{ object.email }}</p>
       <p><strong>Fecha de Registro:</strong> {{ object.date_joined }}</p>
@@ -34,6 +34,10 @@
         </div>
       </p>
     </div>
+  </div>
+  <div class="mt-4">
+    <h4>Mis Órdenes</h4>
+    <a href="{% url 'orders:orders_list' %}" class="btn btn-info">Ver mis órdenes</a>
   </div>
 </div>
 {% endblock %}

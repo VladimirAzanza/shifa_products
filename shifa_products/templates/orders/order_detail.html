@@ -9,8 +9,8 @@
   <div class="row mt-4">
     <div class="col-md-6">
       <h4>Información del Cliente</h4>
-      <p><strong>Nombre de usuario:</strong> {{ order.cart.user.username }}</p>
-      <p><strong>Nombre:</strong> {{ order.cart.user.first_name }} {{ order.cart_item.cart.user.last_name }} </p>
+      <p><strong>Nombre de usuario:</strong> {{ request.user.username }}</p>
+      <p><strong>Nombre:</strong> {{ request.user.first_name }} {{ request.user.last_name }} </p>
       <p><strong>Email:</strong> {{ order.cart.user.email }}</p>
     </div>
     <div class="col-md-6">

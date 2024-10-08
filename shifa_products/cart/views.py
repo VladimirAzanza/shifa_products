@@ -11,7 +11,6 @@ from .models import Cart, CartItem
 from .constants import SUCCESFUL_ADD_T0_CART_MESSAGE
 from catalog.mixins import OnlyAuthorMixin
 from catalog.models import Product
-from orders.forms import OrderForm
 
 
 class AddToCartCreateView(LoginRequiredMixin, CreateView):
@@ -46,14 +45,14 @@ class AddToCartCreateView(LoginRequiredMixin, CreateView):
 
 class CartDetailView(OnlyAuthorMixin, DetailView):
     def get_object(self, queryset=None):
-        return get_object_or_404(
-            Cart,
+        cart, created = Cart.objects.get_or_create(
             user=self.request.user
         )
+        return cart
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cart_item'] = self.get_object().cart_item.annotate(
+        context['cart_item'] = self.get_object().cart_items.annotate(
             total_item=F('quantity') * F('product__price')
         )
         context['addresses'] = self.request.user.addresses.all()

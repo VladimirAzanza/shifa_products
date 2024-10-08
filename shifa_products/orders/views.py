@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
 
 from .forms import OrderForm
-from .models import Order
-from cart.models import Cart, CartItem
+from .models import Order, OrderItem
+from cart.models import Cart
 
 
 class OrderCreateView(CreateView):
@@ -12,10 +12,19 @@ class OrderCreateView(CreateView):
     form_class = OrderForm
 
     def form_valid(self, form):
+        form.instance.user = self.request.user
+        order = form.save()
         cart = get_object_or_404(
             Cart, user=self.request.user
         )
-        form.instance.cart = cart
+        cart_items = cart.cart_items.all()
+        for cart_item in cart_items:
+            OrderItem.objects.create(
+                order=order,
+                product=cart_item.product,
+                quantity=cart_item.quantity
+            )
+        cart.delete()
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -31,6 +40,5 @@ class OrderDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cart = self.object.cart
-        context['cart_items'] = CartItem.objects.filter(cart=cart)
+        context['cart_items'] = self.get_object().order_items.all()
         return context

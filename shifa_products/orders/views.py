@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 
 from .forms import OrderForm
 from .models import Order, OrderItem
@@ -42,3 +42,8 @@ class OrderDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['cart_items'] = self.get_object().order_items.all()
         return context
+
+
+class OrderListView(ListView):
+    model = Order
+    paginate_by = 10

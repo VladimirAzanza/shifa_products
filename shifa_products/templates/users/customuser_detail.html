@@ -17,15 +17,15 @@
     </div>
     <div class="col-md-6">
       <p><strong>Direcciones asociadas para la entrega:</strong>
-        {% if messages %}
-          <div class="container mt-3">
-            {% for message in messages %}
-              <div class="alert alert-info alert-dismissible fade show" role="alert">
-                {{ message }}
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
+      {% if messages %}
+        <div class="container mt-3">
+          {% for message in messages %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
         {% if address_user %}
           {% for address in address_user %}
             <div class="address-item d-flex justify-content-between align-items-center">

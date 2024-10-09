@@ -43,7 +43,7 @@
           <select id="address" name="address" class="form-control">
             {% for address in addresses %}
               <option value="{{ address.id }}">
-                {{ address.street }}, {{ address.location }}, Código postal: {{ address.postal_code }}
+                {{ address }}
               </option>
             {% endfor %}
           </select>

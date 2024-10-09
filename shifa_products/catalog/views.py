@@ -12,7 +12,7 @@ from django.views.generic import (
     DeleteView
 )
 
-from .constants import MAX_REVIEWS_MESSAGE
+from .constants import MAX_REVIEWS_MESSAGE, SIGN_IN_TO_ADD_REVIEW_MESSAGE
 from .forms import ReviewForm
 from .mixins import OnlyAuthorMixin
 from .models import Product, Review
@@ -49,6 +49,10 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
     form_class = ReviewForm
     pk_url_kwarg = 'product_id'
+
+    def handle_no_permission(self):
+        messages.error(self.request, SIGN_IN_TO_ADD_REVIEW_MESSAGE)
+        return super().handle_no_permission()
 
     def get_object(self, queryset=None):
         return get_object_or_404(

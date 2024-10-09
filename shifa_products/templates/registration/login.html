@@ -6,6 +6,15 @@
         <div class="col-md-6 col-lg-4">
             <div class="card shadow-sm p-4">
                 <h2 class="card-title text-center mb-4">Iniciar sesión</h2>
+                {% if messages %}
+                  <div class="container mt-3">
+                  {% for message in messages %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    </div>
+                  {% endfor %}
+                  </div>
+                {% endif %}
                 <form method="post">
                     {% csrf_token %}
                     <div class="mb-3">

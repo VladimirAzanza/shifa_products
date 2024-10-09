@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import F, Sum
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
@@ -10,7 +10,9 @@ from .mixins import (
     CartItemMixin, CartItemUpdateDeleteSuccessUrl, OnlyAuthorCartMixin
 )
 from .models import Cart, CartItem
-from .constants import SUCCESFUL_ADD_T0_CART_MESSAGE
+from .constants import (
+    SUCCESFUL_ADD_T0_CART_MESSAGE, SIGN_IN_TO_ADD_CART_MESSAGE
+)
 from catalog.models import Product
 
 
@@ -22,6 +24,9 @@ class AddToCartCreateView(LoginRequiredMixin, CreateView):
     cart = None
 
     def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, SIGN_IN_TO_ADD_CART_MESSAGE)
+            return redirect('login')
         self.product = get_object_or_404(
             Product,
             pk=self.kwargs.get(self.pk_url_kwarg)

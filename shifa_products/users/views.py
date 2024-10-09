@@ -1,10 +1,12 @@
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.base import Model as Model
-from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
+from .constants import ADDRESS_AT_ORDERS_MESSAGE
 from .forms import AddressUserForm, UserUpdateForm
 from .mixin import GetUserMixin, OnlyAuthorMixin
 from .models import AddressUser
@@ -48,6 +50,13 @@ class AddressUserCreateView(LoginRequiredMixin, CreateView):
 class AddressUserDeleteView(OnlyAuthorMixin, DeleteView):
     model = AddressUser
     pk_url_kwarg = 'address_id'
+
+    def get(self, request, *args, **kwargs):
+        address = self.get_object()
+        if address.orders.exists():
+            messages.error(request, ADDRESS_AT_ORDERS_MESSAGE)
+            return redirect('users:profile', username=address.user.username)
+        return super().get(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse_lazy(

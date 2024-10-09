@@ -6,10 +6,11 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
 from .forms import CartItemForm
-from .mixins import OnlyAuthorCartMixin
+from .mixins import (
+    CartItemMixin, CartItemUpdateDeleteSuccessUrl, OnlyAuthorCartMixin
+)
 from .models import Cart, CartItem
 from .constants import SUCCESFUL_ADD_T0_CART_MESSAGE
-from catalog.mixins import OnlyAuthorMixin
 from catalog.models import Product
 
 
@@ -59,18 +60,13 @@ class CartDetailView(OnlyAuthorCartMixin, DetailView):
         return context
 
 
-class CartItemUpdateView(OnlyAuthorCartMixin, UpdateView):
-    model = CartItem
-    pk_url_kwarg = 'cart_item_id'
+class CartItemUpdateView(
+    CartItemMixin, CartItemUpdateDeleteSuccessUrl, UpdateView
+):
     form_class = CartItemForm
 
-    def get_success_url(self):
-        return reverse_lazy('cart:cart')
 
-
-class CartItemDeleteView(OnlyAuthorCartMixin, DeleteView):
-    model = CartItem
-    pk_url_kwarg = 'cart_item_id'
-
-    def get_success_url(self):
-        return reverse_lazy('cart:cart')
+class CartItemDeleteView(
+    CartItemMixin, CartItemUpdateDeleteSuccessUrl, DeleteView
+):
+    pass

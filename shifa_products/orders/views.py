@@ -1,8 +1,10 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView
 
 from .forms import OrderForm
+from .mixins import OnlyAuthorOrderMixin
 from .models import Order, OrderItem
 from cart.models import Cart
 
@@ -34,7 +36,7 @@ class OrderCreateView(CreateView):
         )
 
 
-class OrderDetailView(DetailView):
+class OrderDetailView(OnlyAuthorOrderMixin, DetailView):
     model = Order
     pk_url_kwarg = 'order_id'
 
@@ -44,6 +46,8 @@ class OrderDetailView(DetailView):
         return context
 
 
-class OrderListView(ListView):
-    model = Order
+class OrderListView(LoginRequiredMixin, ListView):
     paginate_by = 10
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user)

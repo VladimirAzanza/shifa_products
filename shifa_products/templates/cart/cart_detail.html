@@ -41,7 +41,7 @@
         <div class="form-group">
           <label for="address">Dirección de envío</label>
           <select id="address" name="address" class="form-control">
-            {% for address in request.user.addresses.all %}
+            {% for address in addresses %}
               <option value="{{ address.id }}">
                 {{ address.street }}, {{ address.location }}, Código postal: {{ address.postal_code }}
               </option>

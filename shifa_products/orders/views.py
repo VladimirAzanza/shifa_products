@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import F, Sum
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView
@@ -42,7 +43,12 @@ class OrderDetailView(OnlyAuthorOrderMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cart_items'] = self.get_object().order_items.all()
+        context['order_items'] = self.get_object().order_items.annotate(
+            total_item=F('quantity') * F('product__price')
+        )
+        context['order_total'] = self.get_object().order_items.aggregate(
+            order_total=Sum(F('quantity') * F('product__price'), default=0)
+        )['order_total']
         return context
 
 

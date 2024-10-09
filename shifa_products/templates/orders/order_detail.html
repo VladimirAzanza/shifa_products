@@ -22,33 +22,36 @@
 
   <div class="mt-4">
     <h4>Artículos en la Orden</h4>
-    {% if cart_items %}
-      <div class="container mt-3">
-        {% for item in cart_items %}
-          <ul class="list-group">
-            <li class="list-group-item">
-              <p><strong>Producto:</strong> {{ item.product.name }}</p>
-              <p><strong>Cantidad:</strong> {{ item.quantity }}</p>
-              <p><strong>Precio Unitario:</strong> {{ item.product.price }} USD</p>
-            </li>
-          </ul>
-        {% endfor %}
+    {% if order_items %}
+      <table class="table table-striped mt-3">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario (USD)</th>
+            <th>Total (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in order_items %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.product.price|floatformat:2 }}</td>
+            <td>{{ item.total_item|floatformat:2 }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-end">
+        <h4>Total: {{ order_total|floatformat:2 }} USD</h4>
       </div>
     {% endif %}
   </div>
 
   <div class="mt-4">
-    <h4>Total de la Orden</h4>
-    <p><strong>Total:</strong> - USD</p>
-  </div>
-
-  <div class="mt-4">
     <h4>Dirección de entrega</h4>
-    <ul class="list-group">
-      <li class="list-group-item">
-        <p> {{ order.address }}</p>
-      </li>
-    </ul>
+    <p>{{ order.address }}</p>
   </div>
 
   <div class="mt-5">

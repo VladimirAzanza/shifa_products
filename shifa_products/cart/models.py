@@ -35,4 +35,6 @@ class CartItem(models.Model):
     )
 
     def __str__(self):
-        return f'Producto {self.product} en carrito de {self.cart.user.username}'
+        return (
+            f'Producto {self.product} en carrito de {self.cart.user.username}'
+        )

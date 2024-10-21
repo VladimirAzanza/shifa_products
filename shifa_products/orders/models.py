@@ -23,6 +23,9 @@ class Order(models.Model):
         null=True
     )
 
+    def __str__(self):
+        return f'Orden de {self.user.username} creada: {self.created_at}'
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(
@@ -36,3 +39,8 @@ class OrderItem(models.Model):
         on_delete=models.CASCADE
     )
     quantity = models.PositiveSmallIntegerField(verbose_name='Cantidad')
+
+    def __str__(self):
+        return (
+            f'Producto {self.product} en orden de {self.order.user.username}'
+        )

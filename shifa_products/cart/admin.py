@@ -21,7 +21,8 @@ class CartItemAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'cart',
-        'product'
+        'product',
+        'quantity'
     )
     search_fields = (
         'cart__user__username',

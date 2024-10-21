@@ -15,6 +15,9 @@ class Cart(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f'Carrito de {self.user.username} creado: {self.created_at}'
+
 
 class CartItem(models.Model):
     cart = models.ForeignKey(
@@ -30,3 +33,6 @@ class CartItem(models.Model):
     quantity = models.PositiveSmallIntegerField(
         default=1, verbose_name='Cantidad'
     )
+
+    def __str__(self):
+        return f'Producto {self.product} en carrito de {self.cart.user.username}'

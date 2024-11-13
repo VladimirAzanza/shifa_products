@@ -15,6 +15,9 @@ class OrderAdmin(admin.ModelAdmin):
         'user__username',
         'id'
     )
+    list_filter = (
+        'created_at',
+    )
 
 
 @admin.register(OrderItem)
@@ -28,6 +31,10 @@ class OrderItemAdmin(admin.ModelAdmin):
     search_fields = (
         'order__user__username',
         'product__name'
+    )
+    list_filter = (
+        'product',
+        'quantity'
     )
 
 

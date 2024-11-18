@@ -9,7 +9,8 @@ class OrderAdmin(admin.ModelAdmin):
         'id',
         'user',
         'created_at',
-        'address'
+        'address',
+        'status'
     )
     search_fields = (
         'user__username',
@@ -17,6 +18,7 @@ class OrderAdmin(admin.ModelAdmin):
     )
     list_filter = (
         'created_at',
+        'status'
     )
 
 

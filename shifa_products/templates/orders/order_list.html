@@ -13,6 +13,7 @@
                     <th>Orden</th>
                     <th>Fecha de Creación</th>
                     <th>Dirección</th>
+                    <th>Estado de la orden</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +22,7 @@
                         <td><a href="{% url 'orders:order_detail' order.pk %}">{{ order.pk }}</a></td>
                         <td>{{ order.created_at }}</td>
                         <td>{{ order.address }}</td>
+                        <td>{{ order.get_status_display }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

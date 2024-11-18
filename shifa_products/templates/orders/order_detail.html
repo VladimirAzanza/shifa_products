@@ -15,7 +15,16 @@
     </div>
     <div class="col-md-6">
       <h4>Estado de la Orden</h4>
-      <p><strong>Estado:</strong> {{ order.get_status_display }}</p>
+      <p><strong>Estado:</strong>
+        <span class="badge 
+          {% if order.status == 'PENDING' %}bg-warning
+          {% elif order.status == 'PROCESSING' %}bg-primary
+          {% elif order.status == 'SHIPPED' %}bg-info
+          {% elif order.status == 'DELIVERED' %}bg-success
+          {% elif order.status == 'CANCELLED' %}bg-danger
+          {% endif %}">
+          {{ order.get_status_display }}
+        </span>
       <p><strong>Fecha:</strong> {{ order.created_at }}</p>
     </div>
   </div>

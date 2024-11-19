@@ -3,6 +3,7 @@
     <a class="navbar-brand" href="{% url 'pages:index' %}">
       <i class="bi bi-capsule"></i> SHIFA PRODUCTS
     </a>
+    <a class="nav-link" href="{% url 'pages:about_us' %}" style="margin-left: 20px; padding: 8px 15px; border: 1px solid #ddd; border-radius: 5px; background-color: #f8f9fa;">Contacto</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,9 +14,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'catalog:category_list' %}">Productos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'pages:about_us' %}">Contacto</a>
         </li>
         <li class="nav-item">
           {% if user.is_authenticated %}

@@ -52,11 +52,11 @@
       </form>
     </div>
     <div class="mt-3">
-      <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary">Seguir Comprando</a>
+      <a href="{% url 'catalog:category_list' %}" class="btn btn-secondary">Seguir Comprando</a>
     </div>
   {% else %}
     <p>No hay productos en tu carrito.</p>
-    <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Explorar Productos</a>
+    <a href="{% url 'catalog:category_list' %}" class="btn btn-primary">Explorar Productos</a>
   {% endif %}
 </div>
 {% endblock %}

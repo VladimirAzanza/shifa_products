@@ -1,20 +1,10 @@
-from django.urls import path
+from django.urls import include, path
 
 from . import views
 
 app_name = 'catalog'
 
-urlpatterns = [
-    path(
-        '',
-        views.CategoryListView.as_view(),
-        name='category_list'
-    ),
-    path(
-        '<slug:category_slug>/',
-        views.ProductListView.as_view(),
-        name='product_list'
-    ),
+product_urls = [
     path(
         '<int:product_id>/',
         views.ProductDetailView.as_view(),
@@ -34,5 +24,27 @@ urlpatterns = [
         '<int:product_id>/delete_review/<int:review_id>',
         views.ReviewDeleteView.as_view(),
         name='review_delete'
+    )
+]
+
+category_urls = [
+    path(
+        '',
+        views.CategoryListView.as_view(),
+        name='category_list'
+    ),
+    path(
+        '<slug:category_slug>/',
+        views.ProductListView.as_view(),
+        name='category_product_list'
+    )
+]
+
+urlpatterns = [
+    path(
+        'category/', include(category_urls)
+    ),
+    path(
+        'product/', include(product_urls)
     )
 ]

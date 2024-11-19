@@ -15,8 +15,13 @@ from django.views.generic import (
 from .constants import MAX_REVIEWS_MESSAGE, SIGN_IN_TO_ADD_REVIEW_MESSAGE
 from .forms import ReviewForm
 from .mixins import OnlyAuthorMixin
-from .models import Product, Review
+from .models import Category, Product, Review
 from cart.forms import CartItemForm
+
+
+class CategoryListView(ListView):
+    model = Category
+    context_object_name = 'categories'
 
 
 class ProductListView(ListView):

@@ -7,6 +7,11 @@ app_name = 'catalog'
 urlpatterns = [
     path(
         '',
+        views.CategoryListView.as_view(),
+        name='category_list'
+    ),
+    path(
+        '<slug:category_slug>/',
         views.ProductListView.as_view(),
         name='product_list'
     ),

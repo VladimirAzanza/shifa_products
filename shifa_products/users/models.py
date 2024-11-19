@@ -5,7 +5,9 @@ from .constants import MAX_LENTGH_ADDRESS_CONSTANTS
 
 
 class CustomUser(AbstractUser):
-    pass
+    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
 
 
 class AddressUser(models.Model):

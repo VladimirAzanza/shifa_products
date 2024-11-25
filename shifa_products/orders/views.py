@@ -6,8 +6,8 @@ from django.views.generic import CreateView, DetailView, ListView
 
 from .forms import OrderForm
 from .mixins import OnlyAuthorOrderMixin
-from .models import Order, OrderItem\
-from .telegram_notifications import check_tokens, send_notification
+from .models import Order, OrderItem
+from .telegram_notifications import send_notification
 from cart.models import Cart
 
 
@@ -16,10 +16,11 @@ class OrderCreateView(CreateView):
     form_class = OrderForm
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        user = self.request.user
+        form.instance.user = user
         order = form.save()
         cart = get_object_or_404(
-            Cart, user=self.request.user
+            Cart, user=user
         )
         cart_items = cart.cart_items.all()
         for cart_item in cart_items:
@@ -29,11 +30,8 @@ class OrderCreateView(CreateView):
                 quantity=cart_item.quantity
             )
         cart.delete()
-        try:
-            check_tokens()
-            send_notification()
-        except Exception as error:
-            pass
+        message = f'Nuevo pedido de: {user.first_name} {user.last_name}'
+        send_notification(message=message)
         return super().form_valid(form)
 
     def get_success_url(self):

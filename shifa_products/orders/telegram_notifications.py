@@ -1,15 +1,16 @@
+import logging
 import requests
 
 from dotenv import load_dotenv
 from telebot import apihelper, TeleBot
 
-from .exceptions import MissingTokenException
 from shifa_products.constants import (
     TELEGRAM_CHAT_ID,
     TELEGRAM_TOKEN
 )
 
 load_dotenv()
+logger = logging.getLogger('shifa_products')
 
 
 def check_tokens():
@@ -20,11 +21,7 @@ def check_tokens():
         ] if not token
     ]
     if missing_tokens:
-        print(
-            f'Revisa la existencia de los tokens:'
-            f'{", ".join(missing_tokens)}'
-        )
-        raise MissingTokenException(
+        logger.error(
             f'Revisa la existencia de los tokens:'
             f'{", ".join(missing_tokens)}'
         )
@@ -39,5 +36,6 @@ def send_notification(message):
             text=message
         )
     except (requests.RequestException, apihelper.ApiException) as error:
-        message = f'Failed to send message: {error}'
-        print(message)
+        logger.error(
+            f'Error al enviar el mensaje: {error}'
+        )

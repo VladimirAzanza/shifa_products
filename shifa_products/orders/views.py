@@ -9,6 +9,7 @@ from .mixins import OnlyAuthorOrderMixin
 from .models import Order, OrderItem
 from .telegram_notifications import send_notification
 from cart.models import Cart
+from shifa_products.constants import TELEGRAM_MESSAGE
 
 
 class OrderCreateView(CreateView):
@@ -30,8 +31,12 @@ class OrderCreateView(CreateView):
                 quantity=cart_item.quantity
             )
         cart.delete()
-        message = f'Nuevo pedido de: {user.first_name} {user.last_name}'
-        send_notification(message=message)
+        send_notification(
+            message=TELEGRAM_MESSAGE.format(
+                first_name=user.first_name,
+                last_name=user.last_name
+            )
+        )
         return super().form_valid(form)
 
     def get_success_url(self):

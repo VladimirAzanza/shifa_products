@@ -6,7 +6,8 @@ from django.views.generic import CreateView, DetailView, ListView
 
 from .forms import OrderForm
 from .mixins import OnlyAuthorOrderMixin
-from .models import Order, OrderItem
+from .models import Order, OrderItem\
+from .telegram_notifications import check_tokens, send_notification
 from cart.models import Cart
 
 
@@ -28,6 +29,11 @@ class OrderCreateView(CreateView):
                 quantity=cart_item.quantity
             )
         cart.delete()
+        try:
+            check_tokens()
+            send_notification()
+        except Exception as error:
+            pass
         return super().form_valid(form)
 
     def get_success_url(self):

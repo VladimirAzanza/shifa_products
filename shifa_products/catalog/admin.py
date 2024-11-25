@@ -24,6 +24,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'slug',
+        'name'
     )
     search_fields = (
         'slug',
@@ -31,6 +32,7 @@ class CategoryAdmin(admin.ModelAdmin):
     )
     list_editable = (
         'slug',
+        'name'
     )
 
 

@@ -124,12 +124,12 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'file': {
-            'level': 'INFO',
+            'level': 'WARNING',
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/debug.log')
         },
         'console': {
-            'level': 'INFO',
+            'level': 'WARNING',
             'class': 'logging.StreamHandler',
         },
     },
@@ -141,7 +141,7 @@ LOGGING = {
         },
         'shifa_products': {
             'handlers': ['file', 'console'],
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'propagate': False,
         },
     },

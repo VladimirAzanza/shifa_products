@@ -58,10 +58,11 @@ class CartDetailView(OnlyAuthorCartMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cart_item'] = self.get_object().cart_items.annotate(
-            total_item=F('quantity') * F('product__price')
-        )
-        context['cart_total'] = self.get_object().cart_items.aggregate(
+        cart_items = self.get_object().cart_items.select_related(
+            'product'
+        ).annotate(total_item=F('quantity') * F('product__price'))
+        context['cart_item'] = cart_items
+        context['cart_total'] = cart_items.aggregate(
             cart_total=Sum(F('quantity') * F('product__price'), default=0)
         )['cart_total']
         context['addresses'] = self.request.user.addresses.all()

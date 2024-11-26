@@ -29,6 +29,7 @@ class Category(BaseModel):
     class Meta:
         verbose_name = 'Categoría'
         verbose_name_plural = 'Categorías'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -40,6 +41,7 @@ class Location(BaseModel):
     class Meta:
         verbose_name = 'Localidad'
         verbose_name_plural = 'Localidades'
+        ordering = ['id']
 
     def __str__(self):
         return self.name

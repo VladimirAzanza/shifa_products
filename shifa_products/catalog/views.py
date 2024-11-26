@@ -35,7 +35,9 @@ class ProductListView(ListView):
         )
 
     def get_queryset(self):
-        return Product.objects.filter(category=self.get_category())
+        return Product.objects.filter(
+            category=self.get_category()
+        ).select_related('category')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

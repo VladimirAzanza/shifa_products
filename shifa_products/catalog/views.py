@@ -54,7 +54,7 @@ class ProductDetailView(DetailView):
             avg_quality_stars=Avg('reviews__quality_stars'),
             avg_taste_stars=Avg('reviews__taste_stars'),
             review_count=Count('reviews')
-        )
+        ).select_related('category')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

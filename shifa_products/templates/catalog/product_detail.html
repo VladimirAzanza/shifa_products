@@ -11,7 +11,11 @@
     <div class="col-md-6">
       <h2>{{ product.name }}</h2>
       <p class="text-primary">{{ product.price }} USD</p>
-      <p><strong>Categoría:</strong> {{ product.category }}</p>
+      <p><strong>Categoría:</strong> 
+        <a href="{% url 'catalog:category_product_list' category_slug=product.category.slug %}" class="btn btn-light">
+          {{ product.category }}
+        </a>
+      </p>
       <p>{{ product.description }}</p>
       <p>
         <strong>Calidad : </strong>

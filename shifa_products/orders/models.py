@@ -2,7 +2,9 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 from catalog.models import Product
-from shifa_products.constants import DEFAULT_ORDER_STATUS, MAX_LENGHT_ORDER_STATUS, ORDER_STATUS_CHOICES
+from shifa_products.constants import (
+    DEFAULT_ORDER_STATUS, MAX_LENGHT_ORDER_STATUS, ORDER_STATUS_CHOICES
+)
 from users.models import AddressUser
 
 

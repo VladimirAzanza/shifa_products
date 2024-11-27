@@ -64,7 +64,7 @@ if DB_ENGINE == 'PostgreSQL':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('POSTGRES_DB', 'foodgram'),
+            'NAME': os.getenv('POSTGRES_DB', 'shifa_products'),
             'USER': os.getenv('POSTGRES_USER', 'admin'),
             'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
             'HOST': os.getenv('DB_HOST', 'db'),
@@ -104,7 +104,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'collected_static'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
@@ -130,9 +130,7 @@ if DEBUG:
     INSTALLED_APPS += ['debug_toolbar']
     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://localhost:8000',
-]
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'http://localhost:8000').split(' ')
 
 LOGGING = {
     'version': 1,

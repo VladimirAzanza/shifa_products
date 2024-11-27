@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from .constants import MAX_LENTGH_ADDRESS_CONSTANTS
+from shifa_products.constants import MAX_LENTGH_ADDRESS_CONSTANTS
 
 
 class CustomUser(AbstractUser):

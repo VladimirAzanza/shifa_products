@@ -6,10 +6,11 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
-from .constants import ADDRESS_AT_ORDERS_MESSAGE
 from .forms import AddressUserForm, UserUpdateForm
 from .mixin import GetUserMixin, OnlyAuthorMixin
 from .models import AddressUser
+from shifa_products.constants import ADDRESS_AT_ORDERS_MESSAGE
+
 
 User = get_user_model()
 

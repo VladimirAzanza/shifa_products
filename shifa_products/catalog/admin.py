@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .constants import LENGTH_SHORT_REVIEW
 from .models import Category, Location, Product, Review
+from shifa_products.constants import LENGTH_SHORT_REVIEW
 
 
 @admin.register(Product)

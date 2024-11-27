@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from .constants import (
+from shifa_products.constants import (
     HELP_TEXT_SLUG, MAX_LENGTH_NAME, MAX_LENGTH_REVIEW, MAX_LENGTH_TITLE
 )
 

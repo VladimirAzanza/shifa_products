@@ -10,10 +10,10 @@ from .mixins import (
     CartItemMixin, CartItemUpdateDeleteSuccessUrl, OnlyAuthorCartMixin
 )
 from .models import Cart, CartItem
-from .constants import (
+from catalog.models import Product
+from shifa_products.constants import (
     SUCCESFUL_ADD_T0_CART_MESSAGE, SIGN_IN_TO_ADD_CART_MESSAGE
 )
-from catalog.models import Product
 
 
 class AddToCartCreateView(LoginRequiredMixin, CreateView):

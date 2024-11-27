@@ -1,6 +1,6 @@
 from django.forms import ValidationError
 
-from .constants import RATING_MESSAGE
+from shifa_products.constants import RATING_MESSAGE
 
 
 def validate_stars(stars):

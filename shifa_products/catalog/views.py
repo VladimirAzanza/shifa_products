@@ -12,11 +12,13 @@ from django.views.generic import (
     DeleteView
 )
 
-from .constants import MAX_REVIEWS_MESSAGE, SIGN_IN_TO_ADD_REVIEW_MESSAGE
 from .forms import ReviewForm
 from .mixins import OnlyAuthorMixin
 from .models import Category, Product, Review
 from cart.forms import CartItemForm
+from shifa_products.constants import (
+    MAX_REVIEWS_MESSAGE, SIGN_IN_TO_ADD_REVIEW_MESSAGE
+)
 
 
 class CategoryListView(ListView):

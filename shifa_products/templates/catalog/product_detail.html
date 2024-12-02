@@ -67,7 +67,9 @@
       {% for review in reviews %}
       <li class="review-card mb-4 p-3 border rounded">
         <div class="d-flex align-items-start">
-          <img src="{{ review.user.profile_image.url }}" class="me-3 rounded-circle" alt="{{ review.user.username }}" style="width: 50px;">
+          <span class="me-3 rounded-circle" style="width: 50px;">
+            {{ review.user.username }}
+          </span>
           <div class="review-content">
             <h5 class="mt-0 mb-1"><small class="text-muted">{{ review.date }}</small></h5>
             <p class="fw-bold mb-1">{{ review.title }}</p>

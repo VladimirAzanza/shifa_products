@@ -9,6 +9,11 @@ class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
 
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = [
+        'username', 'first_name', 'last_name', 'password'
+    ]
+
 
 class AddressUser(models.Model):
     user = models.ForeignKey(

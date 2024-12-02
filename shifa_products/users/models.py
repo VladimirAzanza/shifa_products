@@ -5,9 +5,9 @@ from shifa_products.constants import MAX_LENTGH_ADDRESS_CONSTANTS
 
 
 class CustomUser(AbstractUser):
-    email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
+    email = models.EmailField('correo electrónico', unique=True)
+    first_name = models.CharField('nombre', max_length=150)
+    last_name = models.CharField('apellido', max_length=150)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [

@@ -26,7 +26,7 @@
             <td>{{ item.total_item|floatformat:2 }}</td>
             <td>
               <a href="{% url 'cart:update_cart_item' item.id %}" class="btn btn-sm btn-warning py-1 mt-1 mb-1 delete-btn">Editar</a>
-              <a href="{% url 'cart:delete_cart_item' item.id %}" class="btn btn-sm btn-warning py-1 mt-1 mb-1 delete-btn">Eliminar producto</a>
+              <a href="{% url 'cart:delete_cart_item' item.id %}" class="btn btn-sm btn-warning py-1 mt-1 mb-1 delete-btn">Eliminar</a>
             </td>
           </tr>
           {% endfor %}

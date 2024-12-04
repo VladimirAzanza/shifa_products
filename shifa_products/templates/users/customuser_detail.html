@@ -35,7 +35,7 @@
               <div class="address-item d-flex justify-content-between align-items-center">
                 <p>{{ address.location }}, {{ address.street }}, {{ address.postal_code }}</p>
                 <div class="text-end">
-                  <a href="{% url 'users:address_delete' address.id %}" class="btn btn-sm btn-warning delete-btn">Eliminar dirección</a>
+                  <a href="{% url 'users:address_delete' address.id %}" class="btn btn-sm btn-warning delete-btn">Eliminar</a>
                 </div>
               </div>
             {% endfor %}

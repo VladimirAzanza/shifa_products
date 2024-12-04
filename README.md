@@ -66,6 +66,22 @@ Finally, run the project with:
   python manage.py runserver
 ```
 
+## Logging Configuration
+
+In Shifa Products, a logging system has been set up to track important events, errors, and activities within the project. This is configured in settings.py. Here’s how the logging system works and how you can access the logs:
+
+The logging system is configured using a dictionary called LOGGING. 
+
+- Handlers: Defines where the log messages should go. In this case, there are two handlers:
+
+  - File Handler: Logs messages to a file (shifa_products/logs/debug.log).
+  - Console Handler: Logs messages to the console.
+
+- Formatters: Specifies how the log messages should be formatted.
+- Loggers: Configures the loggers for specific parts of the project:
+
+  - django: Logs Django-related events to a file.
+  - telegram_notifications: Logs related to order telegram notifications.
 
 ## 🛠 Skills
 Python, Django, Bootstrap

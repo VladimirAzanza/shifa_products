@@ -10,7 +10,7 @@ from shifa_products.constants import (
 )
 
 load_dotenv()
-logger = logging.getLogger('shifa_products')
+logger = logging.getLogger('telegram_notifications')
 
 
 def check_tokens():

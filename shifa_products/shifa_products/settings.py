@@ -138,23 +138,31 @@ LOGGING = {
         'file': {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/debug.log')
+            'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
+            'formatter': 'verbose'
         },
         'console': {
-            'level': 'WARNING',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],
-            'level': 'WARNING',
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
             'propagate': False,
         },
-        'shifa_products': {
+        'telegram_notifications': {
             'handlers': ['file', 'console'],
             'level': 'WARNING',
             'propagate': False,
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
         },
     },
 }

@@ -40,6 +40,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Órden de compra'
         verbose_name_plural = 'Órdenes de compra'
+        ordering = ['-created_at']
 
     def __str__(self):
         return (
@@ -67,6 +68,7 @@ class OrderItem(models.Model):
     class Meta:
         verbose_name = 'Artículo en órden de compra'
         verbose_name_plural = 'Artículos en órden de compra'
+        ordering = ['quantity', 'product__price']
 
     def __str__(self):
         return (

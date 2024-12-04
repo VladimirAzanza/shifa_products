@@ -22,6 +22,7 @@ class Cart(models.Model):
     class Meta:
         verbose_name = 'Carrito de compra'
         verbose_name_plural = 'Carritos de compra'
+        ordering = ['-created_at']
 
     def __str__(self):
         return f'Carrito de {self.user.username} creado: {self.created_at.date()}'
@@ -47,6 +48,7 @@ class CartItem(models.Model):
     class Meta:
         verbose_name = 'Artículo en carrito'
         verbose_name_plural = 'Artículos en carrito'
+        ordering = ['quantity', 'product__price']
 
     def __str__(self):
         return (

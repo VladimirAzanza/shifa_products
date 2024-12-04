@@ -5,48 +5,56 @@
 {% block content %}
 <div class="container my-5">
   <div class="row">
-    <div class="col-md-6">
-      <h4>Perfil de {{ object.username }}</h2>
-      <p><strong>Nombre Completo:</strong> {{ object.get_full_name }}</p>
-      <p><strong>Email:</strong> {{ object.email }}</p>
-      <p><strong>Fecha de Registro:</strong> {{ object.date_joined }}</p>
-      <p><strong>Último Inicio de Sesión:</strong> {{ object.last_login }}</p>
-      <div class="mt-4">
-        <a href="{% url 'users:profile_update' object.username %}" class="btn btn-primary">Editar Perfil</a>
+    <div class="col-lg-6 mb-4 d-flex">
+      <div class="profile-card h-100 d-flex flex-column p-4 rounded shadow-sm bg-light border border-muted">
+        <h4>Perfil de {{ object.username }}</h4>
+        <p><strong>Nombre Completo:</strong> {{ object.get_full_name }}</p>
+        <p><strong>Email:</strong> {{ object.email }}</p>
+        <p><strong>Fecha de Registro:</strong> {{ object.date_joined }}</p>
+        <p><strong>Último Inicio de Sesión:</strong> {{ object.last_login }}</p>
+        <div class="mt-auto">
+          <a href="{% url 'users:profile_update' object.username %}" class="btn btn-primary">Editar Perfil</a>
+        </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <p><strong>Direcciones asociadas para la entrega:</strong>
-      {% if messages %}
-        <div class="container mt-3">
-          {% for message in messages %}
-            <div class="alert alert-info alert-dismissible fade show" role="alert">
-              {{ message }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
-        {% if address_user %}
-          {% for address in address_user %}
-            <div class="address-item d-flex justify-content-between align-items-center">
-              <p>{{ address.location }}, {{ address.street }}, {{ address.postal_code }}</p>
-              <div class="text-end">
-                <a href="{% url 'users:address_delete' address.id %}" class="btn btn-sm btn-warning">Eliminar dirección</a>
+
+    <div class="col-lg-6 mb-4 d-flex">
+      <div class="profile-card h-100 d-flex flex-column p-4 rounded shadow-sm bg-light border border-muted">
+        <p><strong>Direcciones asociadas para la entrega:</strong>
+        {% if messages %}
+          <div class="container mt-3">
+            {% for message in messages %}
+              <div class="alert alert-info alert-dismissible fade show" role="alert">
+                {{ message }}
               </div>
-            </div>
-          {% endfor %}
-        {% else %}
-          No se ha registrado una dirección.
+            {% endfor %}
+          </div>
         {% endif %}
-        <div class="mt-4">
+          {% if address_user %}
+            {% for address in address_user %}
+              <div class="address-item d-flex justify-content-between align-items-center">
+                <p>{{ address.location }}, {{ address.street }}, {{ address.postal_code }}</p>
+                <div class="text-end">
+                  <a href="{% url 'users:address_delete' address.id %}" class="btn btn-sm btn-warning">Eliminar dirección</a>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            No se ha registrado una dirección.
+          {% endif %}
+        </p>
+        <div class="mt-auto">
           <a href="{% url 'users:address_create' %}" class="btn btn-primary">Agregar Dirección de Entrega</a>
         </div>
-      </p>
+      </div>
     </div>
-  </div>
-  <div class="mt-4">
-    <h4>Mis Órdenes</h4>
-    <a href="{% url 'orders:orders_list' %}" class="btn btn-info">Ver mis órdenes</a>
+
+    <div class="orders-section mt-4">
+      <div class="profile-card p-4 rounded shadow-sm bg-light border border-muted">
+        <h4>Mis órdenes</h4>
+        <a href="{% url 'orders:orders_list' %}" class="btn btn-info">Ver mis órdenes</a>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

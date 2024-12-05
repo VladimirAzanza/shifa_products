@@ -3,3 +3,4 @@ pillow==10.4.0
 python-dotenv==1.0.1
 django-debug-toolbar==4.4.6
 pyTelegramBotAPI==4.24.0
+django-tawkto==0.5.1

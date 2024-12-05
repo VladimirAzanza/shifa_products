@@ -3,15 +3,16 @@
 
 This is a work in progress of Shifa Products marketplace using Python-Django as backend with Bootstrapp Frontend.
 
-Shifa Products is an Freelance project designed to sell medicinal products, Customers are allowed to:
+Shifa Products is a Freelance project designed to sell medicinal products, Customers are allowed to:
   - Leave reviews and rate products
   - Add addresses
   - View order status
   - Review order history
   - Edit their profile
   - Manage passwords
+  - Live chat with the site administrator
 
-To write this project, I needed to understand concepts such as: MVT architecture, backend development, url routing, Object-Relation Mapping(Django ORM), static files management, Django templates.
+To develop this project, I needed to understand concepts such as: MVT architecture, backend development, url routing, Object-Relation Mapping(Django ORM), static file management, Django templates and API communication.
 
 
 ## Installation
@@ -82,6 +83,28 @@ The logging system is configured using a dictionary called LOGGING.
 
   - django: Logs Django-related events to a file.
   - telegram_notifications: Logs related to order telegram notifications.
+
+
+## Tawk.to Webhook
+
+This project integrates a Tawk.to webhook to receive notifications of events related to chats on the Tawk.to platform. The captured events include when a chat is started or ended. When one of these events is received, a notification is sent to a Telegram bot with details of the chat, such as the visitor's name and country.
+
+### Configure the webhook URL
+
+Go to your Tawk.to account settings:
+- In the Webhooks section, add the URL of the webhook for your application.
+- Make sure the events you want to receive, such as "Chat Start" and "Chat End," are enabled.
+
+When a chat is started or ended on Tawk.to, a notification will be sent to the Telegram bot in the following format, which is defined in shifa_products.constants.py:
+
+```css
+TELEGRAM_TAWKTO_MESSAGE = (
+    '🚀 Chat {status} en Tawk.to\n'
+    '👤 Usuario: {visitor_name}\n'
+    '🌍 País: {visitor_country}\n'
+)
+```
+
 
 ## 🛠 Skills
 Python, Django, Bootstrap

@@ -1,21 +1,21 @@
 
-# Shifa Products
+# 💊 Shifa Products
 
 This is a work in progress of Shifa Products marketplace using Python-Django as backend with Bootstrapp Frontend.
 
 Shifa Products is a Freelance project designed to sell medicinal products, Customers are allowed to:
-  - Leave reviews and rate products
-  - Add addresses
-  - View order status
-  - Review order history
-  - Edit their profile
-  - Manage passwords
-  - Live chat with the site administrator
+  - 🌟 Leave reviews and rate products
+  - 🏠 Add addresses
+  - 📦 View order status
+  - 🕒 Review order history
+  - ✏️ Edit their profile
+  - 🔑 Manage passwords
+  - 💬 Live chat with the site administrator
 
 To develop this project, I needed to understand concepts such as: MVT architecture, backend development, url routing, Object-Relation Mapping(Django ORM), static file management, Django templates and API communication.
 
 
-## Installation
+## ⚙️ Installation
 
 Cloning the repository:
 
@@ -67,7 +67,7 @@ Finally, run the project with:
   python manage.py runserver
 ```
 
-## Logging Configuration
+## 📜 Logging Configuration
 
 In Shifa Products, a logging system has been set up to track important events, errors, and activities within the project. This is configured in settings.py. Here’s how the logging system works and how you can access the logs:
 
@@ -75,25 +75,25 @@ The logging system is configured using a dictionary called LOGGING.
 
 - Handlers: Defines where the log messages should go. In this case, there are two handlers:
 
-  - File Handler: Logs messages to a file (shifa_products/logs/debug.log).
-  - Console Handler: Logs messages to the console.
+  - 📂 File Handler: Logs messages to a file (shifa_products/logs/debug.log).
+  - 🖥️ Console Handler: Logs messages to the console.
 
 - Formatters: Specifies how the log messages should be formatted.
 - Loggers: Configures the loggers for specific parts of the project:
 
-  - django: Logs Django-related events to a file.
-  - telegram_notifications: Logs related to order telegram notifications.
+  - 🐍 django: Logs Django-related events to a file.
+  - 🤖 telegram_notifications: Logs related to order telegram notifications.
 
 
-## Tawk.to Webhook
+## 📨 Tawk.to Webhook
 
 This project integrates a Tawk.to webhook to receive notifications of events related to chats on the Tawk.to platform. The captured events include when a chat is started or ended. When one of these events is received, a notification is sent to a Telegram bot with details of the chat, such as the visitor's name and country.
 
-### Configure the webhook URL
+### 🔗 Configure the webhook URL
 
 Go to your Tawk.to account settings:
-- In the Webhooks section, add the URL of the webhook for your application.
-- Make sure the events you want to receive, such as "Chat Start" and "Chat End," are enabled.
+- 🌐 In the Webhooks section, add the URL of the webhook for your application.
+- 🔄 Make sure the events you want to receive, such as "Chat Start" and "Chat End," are enabled.
 
 When a chat is started or ended on Tawk.to, a notification will be sent to the Telegram bot in the following format, which is defined in shifa_products.constants.py:
 

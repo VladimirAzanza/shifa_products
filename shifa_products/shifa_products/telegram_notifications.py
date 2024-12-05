@@ -59,7 +59,7 @@ def tawkto_webhook(request):
                     visitor_name=visitor_name,
                     visitor_country=visitor_country
                 )
-            elif event == "chat:end":
+            elif event == 'chat:end':
                 message = TELEGRAM_TAWKTO_MESSAGE.format(
                     status='finalizado',
                     visitor_name=visitor_name,

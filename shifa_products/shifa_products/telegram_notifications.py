@@ -7,8 +7,9 @@ from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
 from telebot import apihelper, TeleBot
 
-from shifa_products.constants import (
+from .constants import (
     TELEGRAM_CHAT_ID,
+    TELEGRAM_TAWKTO_MESSAGE,
     TELEGRAM_TOKEN
 )
 
@@ -50,25 +51,30 @@ def tawkto_webhook(request):
         try:
             data = json.loads(request.body)
             event = data.get('event')
+            visitor_name = data['visitor'].get('name', 'Anónimo')
+            visitor_country = data['visitor'].get('country', 'Anónimo')
             if event == 'chat:start':
-                visitor_name = data['visitor'].get('name', 'Anónimo')
-                message = (
-                    f'🚀 Nuevo chat iniciado en Tawk.to\n'
-                    f'👤 Usuario: {visitor_name}'
+                message = TELEGRAM_TAWKTO_MESSAGE.format(
+                    status='iniciado',
+                    visitor_name=visitor_name,
+                    visitor_country=visitor_country
                 )
-                send_notification(message)
+            elif event == "chat:end":
+                message = TELEGRAM_TAWKTO_MESSAGE.format(
+                    status='finalizado',
+                    visitor_name=visitor_name,
+                    visitor_country=visitor_country
+                )
+            send_notification(message)
             return JsonResponse(
                 {'status': 'success'}, status=200
             )
-        except json.JSONDecodeError as e:
-            logger.error(f'Error al decodificar JSON: {e}')
-            return JsonResponse(
-                {'status': 'error', 'message': 'Invalid JSON'}, status=400
+        except (json.JSONDecodeError, Exception) as error:
+            logger.error(
+                f'Error al enviar el mensaje: {error}'
             )
-        except Exception as e:
-            logger.error(f'Error inesperado: {e}')
             return JsonResponse(
-                {'status': 'error', 'message': str(e)}, status=400
+                {'status': 'error', 'message': str(error)}, status=400
             )
     return JsonResponse(
         {'status': 'invalid request'}, status=400

@@ -41,3 +41,10 @@ ADDRESS_AT_ORDERS_MESSAGE = (
     'No se puede eliminar la dirección seleccionada'
     ' porque está asociada a una órden.'
 )
+
+# Constants for telegram tawk.to chat
+TELEGRAM_TAWKTO_MESSAGE = (
+    '🚀 Chat {status} en Tawk.to\n'
+    '👤 Usuario: {visitor_name}\n'
+    '🌍 País: {visitor_country}\n'
+)

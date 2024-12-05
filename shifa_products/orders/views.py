@@ -7,9 +7,9 @@ from django.views.generic import CreateView, DetailView, ListView
 from .forms import OrderForm
 from .mixins import OnlyAuthorOrderMixin
 from .models import Order, OrderItem
-from .telegram_notifications import send_notification
 from cart.models import Cart
 from shifa_products.constants import TELEGRAM_MESSAGE
+from shifa_products.telegram_notifications import send_notification
 
 
 class OrderCreateView(CreateView):

@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.urls import include, path, reverse_lazy
 from django.views.generic import CreateView
 
+from .telegram_notifications import tawkto_webhook
 from users.forms import UserForm
 
 auth_urls = [
@@ -26,7 +27,8 @@ urlpatterns = [
     path('catalog/', include('catalog.urls', namespace='catalog')),
     path('users/', include('users.urls', namespace='users')),
     path('cart/', include('cart.urls', namespace='cart')),
-    path('order/', include('orders.urls', namespace='orders'))
+    path('order/', include('orders.urls', namespace='orders')),
+    path('webhook/tawkto/', tawkto_webhook, name='tawkto_webhook'),
 ]
 
 if settings.DEBUG:

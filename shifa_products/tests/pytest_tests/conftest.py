@@ -1,11 +1,30 @@
 import io
 
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test.client import Client
 from django.urls import reverse
 from PIL import Image
 import pytest
 
+from .constants import EMAIL_AUTHOR, FIRST_NAME, LAST_NAME, USERNAME
 from catalog.models import Category, Location, Product
+
+
+@pytest.fixture
+def author(django_user_model):
+    return django_user_model.objects.create(
+        email=EMAIL_AUTHOR,
+        username=USERNAME,
+        first_name=FIRST_NAME,
+        last_name=LAST_NAME
+    )
+
+
+@pytest.fixture
+def author_client(author):
+    client = Client()
+    client.force_login(author)
+    return client
 
 
 @pytest.fixture

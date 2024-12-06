@@ -20,6 +20,9 @@ def test_get_routes_availability_for_anonymous_user(client, name):
     assert response.status_code == HTTPStatus.OK
 
 
+# create test for redirect anonymous user when trying to reach only auth user urls
+
+
 @pytest.mark.django_db
 @pytest.mark.parametrize(
     'name',

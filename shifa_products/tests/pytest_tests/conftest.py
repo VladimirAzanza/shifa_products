@@ -100,3 +100,41 @@ def product_detail_url(create_product):
         'catalog:product_detail',
         args=(create_product.id,)
     )
+
+
+@pytest.fixture
+def product_review_url(create_product):
+    return reverse(
+        'catalog:review_form',
+        args=(create_product.id,)
+    )
+
+# create review fixture
+
+
+@pytest.fixture
+def profile_url(author):
+    return reverse(
+        'users:profile',
+        args=(author.username,)
+    )
+
+
+@pytest.fixture
+def profile_update_url(author):
+    return reverse(
+        'users:profile_update',
+        args=(author.username,)
+    )
+
+
+@pytest.fixture
+def profile_create_address_url():
+    return reverse(
+        'users:address_create'
+    )
+
+# create location_fixture
+# create address user fixture
+# create profile_update_direction_fixture
+# create profile_delete_direction_fixture

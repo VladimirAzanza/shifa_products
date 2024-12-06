@@ -1,4 +1,8 @@
+import io
+
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
+from PIL import Image
 import pytest
 
 from catalog.models import Category, Location, Product
@@ -46,10 +50,23 @@ def create_location():
 
 
 @pytest.fixture
-def create_product(create_category, create_location):
+def create_image():
+    image = Image.new('RGB', (100, 100), color='red')
+    image_file = io.BytesIO()
+    image.save(image_file, format='JPEG')
+    image_file.seek(0)
+    image_name = 'pytest_image.jpg'
+    return SimpleUploadedFile(
+        image_name, image_file.read(), content_type='image/jpeg'
+    )
+
+
+@pytest.fixture
+def create_product(create_category, create_location, create_image):
     product = Product.objects.create(
         name='Product 1',
         description='Product description',
+        image=create_image,
         price=10.99,
         category=create_category,
         is_available=True

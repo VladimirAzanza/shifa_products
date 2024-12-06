@@ -167,5 +167,3 @@ LOGGING = {
         },
     },
 }
-
-# TAWKTO_ID_SITE = '1ie92bncs'

@@ -1,5 +1,4 @@
 {% load static %}
-<!-- {% load tawkto_tags %} -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,19 +19,21 @@
   {% include "includes/header.html" %}
   <main>
     {% block content %}{% endblock %}
-    {% if user.is_authenticated %}
-      <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-          var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-          s1.async=true;
-          s1.src="https://embed.tawk.to/67506bfe4304e3196aec6bc7/1ie92bncs";
-          s1.charset='UTF-8';
-          s1.setAttribute('crossorigin','*');
-          s0.parentNode.insertBefore(s1,s0);
-        })();
-      </script>
-    {% endif %}
+    {% with request.resolver_match.view_name as view_name %}
+      {% if view_name == 'pages:about_us' %}
+        <script type="text/javascript">
+          var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+          (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src="https://embed.tawk.to/67506bfe4304e3196aec6bc7/1ie92bncs";
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+          })();
+        </script>    
+      {% endif %}
+    {% endwith %}
   </main>   
   {% include "includes/footer.html" %}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -6,8 +6,18 @@ from django.urls import reverse
 from PIL import Image
 import pytest
 
-from .constants import EMAIL_AUTHOR, FIRST_NAME, LAST_NAME, USERNAME
-from catalog.models import Category, Location, Product
+from .constants import (
+    EMAIL_AUTHOR,
+    FIRST_NAME,
+    LAST_NAME,
+    LOCATION_NAME,
+    QUALITY_STARS,
+    REVIEW_CONTENT,
+    TASTE_STARS,
+    TITLE_REVIEW,
+    USERNAME,
+)
+from catalog.models import Category, Location, Product, Review
 
 
 @pytest.fixture
@@ -65,7 +75,7 @@ def category_product_list_url(create_category):
 
 @pytest.fixture
 def create_location():
-    return Location.objects.create(name='Location 1')
+    return Location.objects.create(name=LOCATION_NAME)
 
 
 @pytest.fixture
@@ -109,7 +119,35 @@ def product_review_url(create_product):
         args=(create_product.id,)
     )
 
-# create review fixture
+
+@pytest.fixture
+def create_review(create_product, author, create_location):
+    review = Review.objects.create(
+        title=TITLE_REVIEW,
+        review=REVIEW_CONTENT,
+        taste_stars=TASTE_STARS,
+        quality_stars=QUALITY_STARS,
+        product=create_product,
+        user=author,
+        location=create_location
+    )
+    return review
+
+
+@pytest.fixture
+def product_update_review_url(create_review):
+    return reverse(
+        'catalog:review_update',
+        args=(create_review.product.id, create_review.id)
+    )
+
+
+@pytest.fixture
+def product_delete_review_url(create_review):
+    return reverse(
+        'catalog:review_delete',
+        args=(create_review.product.id, create_review.id)
+    )
 
 
 @pytest.fixture
@@ -134,7 +172,6 @@ def profile_create_address_url():
         'users:address_create'
     )
 
-# create location_fixture
 # create address user fixture
 # create profile_update_direction_fixture
 # create profile_delete_direction_fixture

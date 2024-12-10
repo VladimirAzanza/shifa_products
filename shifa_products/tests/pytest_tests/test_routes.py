@@ -30,6 +30,14 @@ def test_get_routes_availability_for_anonymous_user(client, name):
             reverse('login')+'?next='+reverse('catalog:review_form', args=(1,))
         ),
         (
+            lazy_fixture('product_update_review_url'),
+            reverse('catalog:product_detail', args=(1,))
+        ),
+        (
+            lazy_fixture('product_delete_review_url'),
+            reverse('catalog:product_detail', args=(1,))
+        ),
+        (
             lazy_fixture('profile_url'),
             reverse('pages:index')
         ),
@@ -43,10 +51,13 @@ def test_get_routes_availability_for_anonymous_user(client, name):
         ),
     )
 )
-def test_redirect_routes_for_anonymous_user(client, name, expected_redirect):
+def test_redirects_for_anonymous_user(client, name, expected_redirect):
     response = client.get(name)
     assert response.status_code == HTTPStatus.FOUND
     assert response['Location'] == expected_redirect
+
+
+# tests for review edit delete by another author
 
 
 @pytest.mark.django_db
@@ -59,6 +70,8 @@ def test_redirect_routes_for_anonymous_user(client, name, expected_redirect):
         lazy_fixture('category_product_list_url'),
         lazy_fixture('product_detail_url'),
         lazy_fixture('product_review_url'),
+        lazy_fixture('product_update_review_url'),
+        lazy_fixture('product_delete_review_url'),
         lazy_fixture('profile_url'),
         lazy_fixture('profile_update_url'),
         lazy_fixture('profile_create_address_url'),

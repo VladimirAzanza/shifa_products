@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from django.urls import reverse
 
 import pytest
 from pytest_lazyfixture import lazy_fixture
@@ -20,7 +21,20 @@ def test_get_routes_availability_for_anonymous_user(client, name):
     assert response.status_code == HTTPStatus.OK
 
 
-# create test for redirect anonymous user when trying to reach only auth user urls
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    'name, expected_redirect',
+    (
+        (lazy_fixture('product_review_url'), reverse('login')),
+        (lazy_fixture('profile_url'), reverse('pages:index')),
+        (lazy_fixture('profile_update_url'), reverse('pages:index')),
+        (lazy_fixture('profile_create_address_url'), reverse('login')),
+    )
+)
+def test_redirect_routes_for_anonymous_user(client, name, expected_redirect):
+    response = client.get(name)
+    assert response.status_code == HTTPStatus.FOUND
+    assert response['Location'] == expected_redirect
 
 
 @pytest.mark.django_db

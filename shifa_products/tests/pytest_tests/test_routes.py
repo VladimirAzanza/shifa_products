@@ -25,10 +25,22 @@ def test_get_routes_availability_for_anonymous_user(client, name):
 @pytest.mark.parametrize(
     'name, expected_redirect',
     (
-        (lazy_fixture('product_review_url'), reverse('login')),
-        (lazy_fixture('profile_url'), reverse('pages:index')),
-        (lazy_fixture('profile_update_url'), reverse('pages:index')),
-        (lazy_fixture('profile_create_address_url'), reverse('login')),
+        (
+            lazy_fixture('product_review_url'),
+            reverse('login')+'?next='+reverse('catalog:review_form', args=(1,))
+        ),
+        (
+            lazy_fixture('profile_url'),
+            reverse('pages:index')
+        ),
+        (
+            lazy_fixture('profile_update_url'),
+            reverse('pages:index')
+        ),
+        (
+            lazy_fixture('profile_create_address_url'),
+            reverse('login')+'?next='+reverse('users:address_create')
+        ),
     )
 )
 def test_redirect_routes_for_anonymous_user(client, name, expected_redirect):

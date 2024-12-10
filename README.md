@@ -111,7 +111,7 @@ Shifa Products includes tests using Pytest to ensure that key functionalities of
 
 ### 🏃‍♂️ Running the tests
 
-To run the tests, simply execute the following from the directory where pytest.ini is located:
+To run the tests, simply execute the following command from the directory where pytest.ini is located:
 
 ```bash
 pytest

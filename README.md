@@ -105,6 +105,25 @@ TELEGRAM_TAWKTO_MESSAGE = (
 )
 ```
 
+## 🧪 Testing with Pytest
+
+Shifa Products includes tests using Pytest to ensure that key functionalities of the system behave correctly. The tests are located in the shifa_products/tests/pytest_tests/ directory and currently focus on verifying the URLs of various endpoints. As the project evolves, more tests will be added to cover other aspects.
+
+### 🏃‍♂️ Running the tests
+
+To run the tests, simply execute the following from the directory where pytest.ini is located:
+
+```bash
+pytest
+```
+By default, Pytest will search for any test files in the tests/pytest_tests/ directory and run them.
+
+### 💡 Tips for running tests
+
+- You can run specific test files or test functions by specifying their names:
+```bash
+pytest tests/pytest_tests/test_routes.py
+```
 
 ## 🛠 Skills
 Python, Django, Bootstrap

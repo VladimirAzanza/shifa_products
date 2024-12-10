@@ -80,6 +80,7 @@ def create_location():
     return Location.objects.create(name=LOCATION_NAME)
 
 
+# Delete images created
 @pytest.fixture
 def create_image():
     image = Image.new('RGB', (100, 100), color='red')

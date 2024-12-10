@@ -7,6 +7,8 @@ from PIL import Image
 import pytest
 
 from .constants import (
+    CATEGORY_NAME,
+    CATEGORY_SLUG,
     EMAIL_AUTHOR,
     FIRST_NAME,
     LAST_NAME,
@@ -61,7 +63,7 @@ def category_url():
 @pytest.fixture
 def create_category():
     return Category.objects.create(
-        name='Category 1', slug='category-1'
+        name=CATEGORY_NAME, slug=CATEGORY_SLUG
     )
 
 

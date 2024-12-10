@@ -12,3 +12,7 @@ QUALITY_STARS = 5
 
 # Constants for Location
 LOCATION_NAME = 'Location 1'
+
+# Constants for Category
+CATEGORY_NAME = 'Category 1'
+CATEGORY_SLUG = 'category-1'

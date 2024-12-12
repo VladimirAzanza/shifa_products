@@ -10,7 +10,9 @@
     <div class="col-md-4 mb-4">
       <div class="card h-100">
         {% if category.image %}
-        <img src="{{ category.image.url }}" class="card-img-top" alt="Imagen de la categoría {{ category.name }}">
+        <figure>
+          <img src="{{ category.image.url }}" class="card-img-top" alt="Imagen de la categoría {{ category.name }}">
+        </figure>
         {% endif %}
         <div class="card-body">
           <h5 class="card-title text-center">{{ category.name }}</h5>

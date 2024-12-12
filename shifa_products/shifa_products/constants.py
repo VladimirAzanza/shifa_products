@@ -25,7 +25,11 @@ MAX_LENGTH_REVIEW = 300
 MAX_REVIEWS_MESSAGE = (
     'Solo se permite una reseña por cliente para este producto.'
 )
-RATING_MESSAGE = 'La calificación no puede ser menor a 1 ni mayor a 5'
+RATING_MESSAGE = 'La calificación no puede ser menor a 1 ni mayor a 5.'
+IMAGE_FORMAT_MESSAGE = 'Solo se permiten imágenes JPEG.'
+WIDTH_SIZE_IMAGE = 2000
+HEIGHT_SIZE_IMAGE = 2000
+IMAGE_SIZE_MESSAGE = 'La resolución máxima permitida es 2000x2000 píxeles.'
 SIGN_IN_TO_ADD_REVIEW_MESSAGE = (
     'Inicia sesión para añadir una reseña al producto.'
 )

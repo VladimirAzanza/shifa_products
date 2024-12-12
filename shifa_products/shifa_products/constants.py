@@ -38,6 +38,7 @@ HELP_TEXT_SLUG = (
     ' Se aceptan símbolos, guiones o guiones bajos.'
 )
 LENGTH_SHORT_REVIEW = 20
+QUALITY_IMAGE = 50
 
 # Constants for users
 MAX_LENTGH_ADDRESS_CONSTANTS = 100

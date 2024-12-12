@@ -158,6 +158,11 @@ LOGGING = {
             'level': 'WARNING',
             'propagate': False,
         },
+        'admin_notifications': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
     },
     'formatters': {
         'verbose': {

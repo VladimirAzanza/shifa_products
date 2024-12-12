@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
+from .utils import optimize_image
 from .validators import validate_image
 from shifa_products.constants import (
     HELP_TEXT_SLUG, MAX_LENGTH_NAME, MAX_LENGTH_REVIEW, MAX_LENGTH_TITLE
@@ -83,6 +84,10 @@ class Product(BaseModel):
         verbose_name = 'Producto'
         verbose_name_plural = 'Productos'
         ordering = ['id']
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        optimize_image(self.image)
 
     def __str__(self):
         return self.name

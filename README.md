@@ -14,6 +14,9 @@ Shifa Products is a Freelance project designed to sell medicinal products, Custo
 
 To develop this project, I needed to understand concepts such as: MVT architecture, backend development, url routing, Object-Relation Mapping(Django ORM), static file management, Django templates and API communication.
 
+### Key Features
+ - Product Image Validation: All product images are validated for JPEG format and must meet the resolution requirement of 2000x2000 pixels. The resolution limit is set to balance visual quality with loading performance.
+ - Optimized Image Storage: Product images are automatically optimized during upload, reducing file size without compromising quality, using compression and resizing techniques. By optimizing the images, we ensure faster delivery to the frontend, improving the website’s overall loading speed and user experience, especially for mobile users or slow connections.
 
 ## ⚙️ Installation
 

@@ -3,11 +3,15 @@
 {% block title %}Inicio - SHIFA PRODUCTS{% endblock %}
 
 {% block content %}
-  <div class="container text-center my-5">
-    <div class="welcome-message">
-      <h1>Bienvenido a SHIFA PRODUCTS</h1>
-      <p class="lead">Explora nuestra gama de productos de alta calidad.</p>
+  <div class="hero">
+    <div class="container text-center my-5">
+      <div class="welcome-message">
+        <h1>SHIFA PRODUCTS</h1>
+        <p class="lead">
+          Explora nuestra gama de productos de alta calidad.
+        </p>
+        <a href="{% url 'catalog:category_list' %}" class="btn btn-primary btn-lg">Ver Productos</a>
+      </div>
     </div>
-    <a href="{% url 'catalog:category_list' %}" class="btn btn-primary btn-lg">Ver Productos</a>
   </div>
 {% endblock %}

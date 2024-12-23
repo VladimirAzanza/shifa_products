@@ -69,9 +69,16 @@ def tawkto_webhook(request):
             return JsonResponse(
                 {'status': 'success'}, status=200
             )
-        except (json.JSONDecodeError, Exception) as error:
+        except json.JSONDecodeError as error:
             logger.error(
-                f'Error al enviar el mensaje: {error}'
+                f'Error al enviar el mensaje debido al formato JSON: {error}'
+            )
+            return JsonResponse(
+                {'status': 'error', 'message': str(error)}, status=400
+            )
+        except Exception as error:
+            logger.error(
+                f'Error inesperado al enviar el mensaje: {error}'
             )
             return JsonResponse(
                 {'status': 'error', 'message': str(error)}, status=400

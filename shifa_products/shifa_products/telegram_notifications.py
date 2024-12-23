@@ -39,9 +39,17 @@ def send_notification(message):
             chat_id=TELEGRAM_CHAT_ID,
             text=message
         )
-    except (requests.RequestException, apihelper.ApiException) as error:
+    except requests.RequestException as error:
         logger.error(
-            f'Error al enviar el mensaje: {error}'
+            f'Error en la solicitud HTTP: {error}'
+        )
+    except apihelper.ApiException as error:
+        logger.error(
+            f'Error con la API de telegram: {error}'
+        )
+    except Exception as error:
+        logger.error(
+            f'Error inesperado al enviar mensaje a telegram: {error}'
         )
 
 
@@ -78,7 +86,7 @@ def tawkto_webhook(request):
             )
         except Exception as error:
             logger.error(
-                f'Error inesperado al enviar el mensaje: {error}'
+                f'Error inesperado con el webhook de tawkto: {error}'
             )
             return JsonResponse(
                 {'status': 'error', 'message': str(error)}, status=400

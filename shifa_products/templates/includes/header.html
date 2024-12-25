@@ -42,8 +42,11 @@
           </li>
         {% else %}
           <li class="nav-item">
-            <a class="btn btn-primary ms-2" href="{% url 'login' %}">
-              <i class="bi bi-person-walking"></i> Iniciar sesión
+            <a class="btn btn-primary custom-button login-color" href="{% url 'login' %}">
+              <div class="sign">
+                <i class="bi bi-person-walking"></i>
+              </div>
+              <div class="text-button">Iniciar sesión</div>
             </a>
           </li>
         {% endif %}

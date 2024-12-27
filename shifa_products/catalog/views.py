@@ -47,6 +47,31 @@ class ProductListView(ListView):
         return context
 
 
+class ProductSearchView(ListView):
+    model = Product
+    context_object_name = 'products'
+
+    def get_query(self):
+        return self.request.GET.get('q')
+
+    def get_queryset(self):
+        query = self.get_query()
+        object_list = Product.objects.filter((
+            Q(name__icontains=query)
+            | Q(description__icontains=query)
+            | Q(category__name__icontains=query)
+            | Q(category__slug__icontains=query)
+            ) & Q(is_available=True)
+        )
+        return object_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_active'] = True
+        context['query'] = self.get_query()
+        return context
+
+
 class ProductDetailView(DetailView):
     model = Product
     pk_url_kwarg = 'product_id'
@@ -65,22 +90,6 @@ class ProductDetailView(DetailView):
         context['reviews'] = paginator.get_page(page)
         context['form'] = CartItemForm()
         return context
-
-
-class ProductSearchView(ListView):
-    model = Product
-    template_name = 'catalog/product_search.html'
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = Product.objects.filter((
-            Q(name__icontains=query)
-            | Q(description__icontains=query)
-            | Q(category__name__icontains=query)
-            | Q(category__slug__icontains=query)
-            ) & Q(is_available=True)
-        )
-        return object_list
 
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):

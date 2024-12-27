@@ -1,10 +1,22 @@
 {% extends 'base.html' %}
 
-{% block title %}Productos en {{ category.name }}{% endblock %}
+{% block title %}
+  {% if search_active %}
+    Productos para "{{ query }}"
+  {% else %}
+    Productos en {{ category.name }}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
 <div id="products" class="container my-5">
-  <h2 class="mb-4">{{ category.name }}</h2>
+  <h2 class="mb-4">
+    {% if search_active %}
+      Resultados de búsqueda para: "{{ query }}"
+    {% else %}
+      Productos en {{ category.name }}
+    {% endif %}
+  </h2>
   <div class="row">
     {% for product in products %}
     <div class="col-md-4 mb-4">
@@ -20,6 +32,8 @@
         </div>
       </div>
     </div>
+    {% empty %}
+        <p>No se encontraron productos.</p>
     {% endfor %}
   </div>
 </div>

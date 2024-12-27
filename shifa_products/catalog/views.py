@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from django.db.models import Avg, Count
+from django.db.models import Avg, Count, Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -65,6 +65,22 @@ class ProductDetailView(DetailView):
         context['reviews'] = paginator.get_page(page)
         context['form'] = CartItemForm()
         return context
+
+
+class ProductSearchView(ListView):
+    model = Product
+    template_name = 'catalog/product_search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Product.objects.filter((
+            Q(name__icontains=query)
+            | Q(description__icontains=query)
+            | Q(category__name__icontains=query)
+            | Q(category__slug__icontains=query)
+            ) & Q(is_available=True)
+        )
+        return object_list
 
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):

@@ -46,5 +46,10 @@ urlpatterns = [
     ),
     path(
         'product/', include(product_urls)
-    )
+    ),
+    path(
+        'search/',
+        views.ProductSearchView.as_view(),
+        name='product_search'
+    ),
 ]

@@ -3,6 +3,10 @@
 {% block title %}Nuestros Productos{% endblock %}
 
 {% block content %}
+<form method="get" action="{% url 'catalog:product_search' %}">
+  <input type="text" name="q" placeholder="Buscar productos...">
+  <button type="submit">Buscar</button>
+</form>
 <div id="categories" class="container my-5">
   <h2 class="mb-4 text-center">Nuestros Productos</h2>
   <div class="row">

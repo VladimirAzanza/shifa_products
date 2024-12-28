@@ -4,6 +4,9 @@
 
 {% block content %}
 <div class="container my-5">
+  <div class="mt-4">
+    <a href="{% url 'orders:order_pdf' order.id %}" class="btn btn-primary">Descargar en PDF</a>
+  </div>
   <h2>Detalles de la Orden #{{ order.id }}</h2>
   
   <div class="row mt-4">

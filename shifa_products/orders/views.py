@@ -1,8 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import F, Sum
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, View
+from weasyprint import HTML
 
 from .forms import OrderForm
 from .mixins import OnlyAuthorOrderMixin
@@ -66,3 +69,33 @@ class OrderListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
+
+
+class OrderPdfPrintView(OnlyAuthorOrderMixin, View):
+    def get_object(self):
+        return get_object_or_404(
+            Order,
+            pk=self.kwargs.get('order_id'),
+            user=self.request.user
+        )
+
+    def get(self, request, *args, **kwargs):
+        order = self.get_object()
+        order_items = order.order_items.annotate(
+            total_item=F('quantity') * F('product__price')
+        )
+        order_total = order.order_items.aggregate(
+            order_total=Sum(F('quantity') * F('product__price'), default=0)
+        )['order_total']
+        context = {
+            'order': order,
+            'order_items': order_items,
+            'order_total': order_total
+        }
+        html_template = render_to_string('orders/order_to_pdf.html', context)
+        pdf_file = HTML(string=html_template).write_pdf()
+        response = HttpResponse(pdf_file, content_type='application/pdf')
+        response['Content-Disposition'] = (
+            f'attachment; filename="order_{order.id}.pdf"'
+        )
+        return response

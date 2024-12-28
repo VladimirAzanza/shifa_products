@@ -1,0 +1,72 @@
+  {% load static %}
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Detalles de la Orden {{ order.id }}</title>
+      <style>
+        body {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+        }        
+        th, td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: left;
+        }        
+        th {
+          background-color: #f2f2f2;
+        }        
+        .total {
+          text-align: right;
+          font-weight: bold;
+        }        
+        main {
+          flex: 1;
+        }
+      </style>
+  </head>
+  <body>
+      <main>
+        <h1>Orden #{{ order.id }}</h1>
+        <p><strong>Estado:</strong> {{ order.status }}</p>
+        <p><strong>Cliente:</strong> {{ order.user.first_name }} {{ order.user.last_name }}</p>
+        <p><strong>Fecha:</strong> {{ order.created_at }}</p>
+        <p><strong>Email:</strong> {{ order.user.email }}</p>
+
+        <h2>Artículos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order_items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.product.price|floatformat:2 }}</td>
+                    <td>{{ item.total_item|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p class="total">Total: {{ order_total|floatformat:2 }} USD</p>
+
+        <h2>Dirección de Entrega</h2>
+        <p>{{ order.address }}</p>
+      </main>
+  </body>
+  </html>

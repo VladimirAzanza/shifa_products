@@ -16,6 +16,11 @@ urlpatterns = [
         name='order_detail'
     ),
     path(
+        'detail/<int:order_id>/pdf',
+        views.OrderPdfPrintView.as_view(),
+        name='order_pdf'
+    ),
+    path(
         'checkout/',
         views.OrderCreateView.as_view(),
         name='checkout'

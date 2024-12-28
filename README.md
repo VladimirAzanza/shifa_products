@@ -12,6 +12,7 @@ Shifa Products is a Freelance project designed to sell medicinal products, Custo
   - 🔑 Manage passwords
   - 💬 Live chat with the site administrator
   - 🔍 Search for products
+  - 🖨️ Download order details in PDF format
 
 To develop this project, I needed to understand concepts such as: MVT architecture, backend development, url routing, Object-Relation Mapping(Django ORM), static file management, Django templates and API communication.
 

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load allauth %}
+{% load socialaccount %}
+
+{% block head_title %}
+    {% trans "Iniciar sesión" %}
+{% endblock head_title %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm p-4">
+        {% if process == "connect" %}
+            <h3 class="card-title text-center mb-4">
+                {% blocktrans with provider.name as provider %}Conectar con {{ provider }}{% endblocktrans %}
+            </h3>
+            <p class="text-center">
+                {% blocktrans with provider.name as provider %}Está a punto de conectar una nueva cuenta externa desde {{ provider }}.{% endblocktrans %}
+            </p>
+        {% else %}
+            <h3 class="card-title text-center mb-4">
+                {% blocktrans with provider.name as provider %}Iniciar sesión mediante {{ provider }}{% endblocktrans %}
+            </h3>
+            <p class="text-center">
+                {% blocktrans with provider.name as provider %}Está a punto de iniciar sesión usando una cuenta externa desde {{ provider }}.{% endblocktrans %}
+            </p>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary w-100">
+                {% trans "Continuar" %}
+              </button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

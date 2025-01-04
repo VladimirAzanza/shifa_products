@@ -51,6 +51,7 @@ SOCIALACCOUNT_PROVIDERS = {
         'APP': {
             'client_id': os.getenv('CLIENT_ID'),
             'secret': os.getenv('SECRET'),
+            'key': ''
         }
     }
 }

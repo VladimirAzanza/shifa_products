@@ -10,6 +10,7 @@ Shifa Products is a Freelance project designed to sell medicinal products, Custo
   - 🕒 Review order history
   - ✏️ Edit their profile
   - 🔑 Manage passwords
+  - 📧 Login with Gmail
   - 💬 Live chat with the site administrator
   - 🔍 Search for products
   - 🖨️ Download order details in PDF format
@@ -67,6 +68,11 @@ Environment variables (You have an example at .env.example):
   POSTGRES_PASSWORD=password
   DB_HOST=db
   DB_PORT=5432
+
+  #Google social login
+  #For more info visit: https://docs.allauth.org/en/latest/index.html
+  CLIENT_ID=google-id-credential
+  SECRET=google-secret-credential
 ```
 Finally, run the project with:
 ```bash

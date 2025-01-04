@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load socialaccount %}
 
 {% block content %}
 <div class="container mt-5">
@@ -95,6 +96,9 @@
                     <!-- Enlace para iniciar sesión -->
                     <div class="text-center mt-3">
                         <p class="mb-0">¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{% provider_login_url 'google' %}" class="btn btn-dnager">Inicia sesión con Google</a>
                     </div>
                 </form>
             </div>

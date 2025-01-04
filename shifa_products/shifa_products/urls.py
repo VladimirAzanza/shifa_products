@@ -22,6 +22,7 @@ auth_urls = [
 
 urlpatterns = [
     path('', include('pages.urls', namespace='pages')),
+    path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
     path('auth/', include(auth_urls)),
     path('catalog/', include('catalog.urls', namespace='catalog')),

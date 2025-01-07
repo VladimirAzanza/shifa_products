@@ -9,6 +9,15 @@
 {% endblock %}
 
 {% block content %}
+{% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
 <div id="products" class="container my-5">
   <h2 class="mb-4">
     {% if search_active %}
@@ -28,7 +37,16 @@
           <h5 class="card-title">{{ product.name }}</h5>
           <p class="card-text">{{ product.category }}</p>
           <p class="card-text text-primary">{{ product.price }} USD</p>
-          <a href="{% url 'catalog:product_detail' product.id %}" class="btn btn-outline-primary">Ver Detalles</a>
+          <div class="d-flex align-items-center my-3">
+            <a href="{% url 'catalog:product_detail' product.id %}" class="btn btn-outline-primary me-2">Ver Detalles</a>
+            <form action="{% url 'cart:add_to_cart' product.id %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <input type="hidden" name="quantity" value="1">
+              <button class="btn btn-success" type="submit">
+                <i class="bi bi-cart"></i> Agregar a carrito
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

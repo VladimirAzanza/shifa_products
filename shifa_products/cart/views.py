@@ -44,8 +44,8 @@ class AddToCartCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy(
-            'catalog:product_detail',
-            kwargs={'product_id': self.object.product.pk}
+            'catalog:category_product_list',
+            kwargs={'category_slug': self.object.product.category.slug}
         )
 
 

@@ -28,7 +28,7 @@
     </div>
     <div class="mb-3">
       <label for="id_taste_stars" class="form-label">Estrellas de Sabor</label>
-      <input type="number" name="taste_stars" value="{{ form.taste_stars.value|default:"5" }}" class="form-control" id="id_taste_stars">
+      <input type="number" name="taste_stars" value="{{ form.taste_stars.value|default:"5" }}" class="form-control" id="id_taste_stars" min="1" max="5">
       {% if form.taste_stars.errors %}
         <div class="text-danger">
           {{ form.taste_stars.errors }}
@@ -37,7 +37,7 @@
     </div>
     <div class="mb-3">
       <label for="id_quality_stars" class="form-label">Estrellas de Calidad</label>
-      <input type="number" name="quality_stars" value="{{ form.quality_stars.value|default:"5" }}" class="form-control" id="id_quality_stars">
+      <input type="number" name="quality_stars" value="{{ form.quality_stars.value|default:"5" }}" class="form-control" id="id_quality_stars" min="1" max="5">
       {% if form.quality_stars.errors %}
         <div class="text-danger">
           {{ form.quality_stars.errors }}

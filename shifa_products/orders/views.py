@@ -16,6 +16,24 @@ from shifa_products.telegram_notifications import send_notification
 
 
 class OrderCreateView(CreateView):
+    """View for creating a new order and processing the cart items.
+
+    Inherits from:
+        - CreateView: Handles the creation of a new 'Order' object.
+
+    Attributes:
+        model (Model): The model associated with the view 'Order'.
+        form_class (Form): The form class used to create 'Order'.
+
+    Methods:
+        form_valid(form):
+            Adds the user to the order, processes the cart items, deletes
+            the cart, and sends a Telegram notification.
+
+        get_success_url():
+            Returns the URL to redirect to after successfully creating
+            the order.
+    """
     model = Order
     form_class = OrderForm
 
@@ -50,6 +68,21 @@ class OrderCreateView(CreateView):
 
 
 class OrderDetailView(OnlyAuthorOrderMixin, DetailView):
+    """View for displaying the details of a specific order.
+
+    Inherits from:
+        - OnlyAuthorOrderMixin: Restricts access to the order owner.
+        - DetailView: Displays a single 'Order' object.
+
+    Attributes:
+        model (Model): The model associated with the view 'Order'.
+        pk_url_kwarg (str): The URL keyword used to identify the order.
+
+    Methods:
+        get_context_data(**kwargs):
+            Adds order items and calculates the total for the order to
+            the context.
+    """
     model = Order
     pk_url_kwarg = 'order_id'
 
@@ -65,6 +98,20 @@ class OrderDetailView(OnlyAuthorOrderMixin, DetailView):
 
 
 class OrderListView(LoginRequiredMixin, ListView):
+    """View for listing all orders for the currently logged-in user.
+
+    Inherits from:
+        - LoginRequiredMixin: Ensures the user is authenticated.
+        - ListView: Displays a list of 'Order' objects.
+
+    Attributes:
+        paginate_by (int): Number of orders per page.
+
+    Methods:
+        get_queryset():
+            Filters orders to display only the ones associated with the
+            current user.
+    """
     paginate_by = 10
 
     def get_queryset(self):
@@ -72,6 +119,20 @@ class OrderListView(LoginRequiredMixin, ListView):
 
 
 class OrderPdfPrintView(OnlyAuthorOrderMixin, View):
+    """View for generating and downloading a PDF of a specific order.
+
+    Inherits from:
+        - OnlyAuthorOrderMixin: Restricts access to the order owner.
+        - View: Provides basic functionality for handling HTTP requests.
+
+    Methods:
+        get_object():
+            Retrieves the 'Order' object associated with the URL parameter
+            `order_id`.
+
+        get(request, *args, **kwargs):
+            Generates the PDF for the order and returns it as an HTTP response.
+    """
     def get_object(self):
         return get_object_or_404(
             Order,

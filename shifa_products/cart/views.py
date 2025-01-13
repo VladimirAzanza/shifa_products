@@ -17,6 +17,27 @@ from shifa_products.constants import (
 
 
 class AddToCartCreateView(LoginRequiredMixin, CreateView):
+    """View for adding a product to the cart.
+
+    Inherits:
+        - LoginRequiredMixin: Ensures the user is authenticated.
+        - CreateView: Handles the creation of a new `CartItem`.
+
+    Attributes:
+        model (Model): The model for the view 'CartItem'.
+        form_class (Form): The form for creating 'CartItem'.
+        pk_url_kwarg (str): The URL keyword for the product 'product_id'.
+        product (Product): The product to be added to the cart.
+        cart (Cart): The cart for the logged-in user.
+
+    Methods:
+        dispatch(request, *args, **kwargs):
+            Handles authentication and initializes the cart/product.
+        form_valid(form):
+            Assigns the product and cart to the `CartItem`.
+        get_success_url():
+            Returns the URL for redirection after success.
+    """
     model = CartItem
     form_class = CartItemForm
     pk_url_kwarg = 'product_id'
@@ -50,6 +71,20 @@ class AddToCartCreateView(LoginRequiredMixin, CreateView):
 
 
 class CartDetailView(OnlyAuthorCartMixin, DetailView):
+    """View for displaying the details of the user's cart.
+
+    Inherits from:
+        - OnlyAuthorCartMixin: Restricts access to the cart owner.
+        - DetailView: Displays the details of a single cart.
+
+    Methods:
+        get_object(queryset=None):
+            Fetches or creates the cart for the logged-in user.
+
+        get_context_data(**kwargs):
+            Adds additional context to the template, such as cart items,
+            total cost, and user addresses.
+    """
     def get_object(self, queryset=None):
         cart, created = Cart.objects.get_or_create(
             user=self.request.user
@@ -72,10 +107,27 @@ class CartDetailView(OnlyAuthorCartMixin, DetailView):
 class CartItemUpdateView(
     CartItemMixin, CartItemUpdateDeleteSuccessUrl, UpdateView
 ):
+    """View for updating a cart item.
+
+    Inherits:
+        - CartItemMixin: Handles cart item-specific logic.
+        - CartItemUpdateDeleteSuccessUrl: Provides the URL after update.
+        - UpdateView: Handles the update of a `CartItem`.
+
+    Attributes:
+        form_class (Form): The form for updating `CartItem`.
+    """
     form_class = CartItemForm
 
 
 class CartItemDeleteView(
     CartItemMixin, CartItemUpdateDeleteSuccessUrl, DeleteView
 ):
+    """View for deleting a cart item.
+
+    Inherits:
+        - CartItemMixin: Handles cart item-specific logic.
+        - CartItemUpdateDeleteSuccessUrl: Provides the URL after deletion.
+        - DeleteView: Handles the deletion of a `CartItem`.
+    """
     pass

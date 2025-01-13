@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <div class="container text-center mb-4">
+    <h1>Code Documentation</h1>
+    <h2>Model Diagram</h2>
+    <p>The following diagram illustrates the relationships between the models used in the project:</p>
+    <a href="{% static 'diagrams/models.png' %}" target="_blank">
+      <img src="{% static 'diagrams/models.png' %}" alt="Model Diagram" class="img-fluid" style="max-width: 80%; height: auto;">
+    </a>
+  </div>
+{% endblock %}

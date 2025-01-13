@@ -137,5 +137,25 @@ By default, Pytest will search for any test files in the tests/pytest_tests/ dir
 pytest tests/pytest_tests/test_routes.py
 ```
 
+### 💻 Generating the Model Diagram (models.png)
+
+To generate a diagram of the models used in the project, you can use the Django Extensions package, which provides a command to create a visual representation of your models. Follow these steps:
+
+```bash
+pip install django-extensions
+```
+
+Add django-extensions to your INSTALLED_APPS: Open the settings.py file and add 'django_extensions' to your INSTALLED_APPS list.
+
+INSTALLED_APPS = [
+    ...
+    'django_extensions',
+]
+
+Generate the Model Diagram: Once everything is installed, you can generate the diagram by running the following command:
+```bash
+python manage.py graph_models -a -g -o static/diagrams/models.png
+```
+View the Diagram: You can now view the diagram at static/diagrams/models.png. This file will show how the models in the project are related to each other.
 ## 🛠 Skills
 Python, Django, Bootstrap, CSS, HTML
